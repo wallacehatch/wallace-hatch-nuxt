@@ -115,7 +115,7 @@ export default {
   mounted() {
     this.setSkuNav(this.sku)
     this.setLazyLoad();
-    window.fbq('track', 'ViewContent');
+    window.fbq && window.fbq('track', 'ViewContent');
   },
   beforeMount() {
     this.loadSku(this.sku);
@@ -172,7 +172,7 @@ export default {
     },
     handleAddCartClick() {
       BagService.addItem(this.product, this.sku, 1);
-      window.fbq('track', 'AddToCart');
+      window.fbq && window.fbq('track', 'AddToCart');
       this.$store.commit('INC_BADGE_NUMBER');
       this.$store.commit('SET_CART_ACTIVE', true);
     }

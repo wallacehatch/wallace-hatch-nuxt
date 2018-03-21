@@ -72,7 +72,7 @@ export default {
           orderId: orderId,
         }
         hj('stateChange', '/ordersuccess');
-        window.fbq('track', 'Purchase');
+        window.fbq && window.fbq('track', 'Purchase');
         // TODO Rewrite this using standard ga api
         // this.$ga.event('event', 'conversion', {
         //     'send_to': 'AW-812669170/xHNFCMDg4H4Q8rHBgwM',
