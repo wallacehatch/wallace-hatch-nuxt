@@ -1,0 +1,128 @@
+@import 'variables';
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: $serif-font;
+  font-size: 62.5%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+h1 {
+    font-family: $serif-font;
+    font-size: 32px;
+    line-height: 1.5;
+    letter-spacing: 10px;
+    color: black;
+    font-weight: 500;
+}
+
+h3 {
+    font-family: $serif-font;
+    font-size: 32px;
+    line-height: 1.5;
+    letter-spacing: 10px;
+    text-align: center;
+}
+
+h4{
+  font-family: $serif-font;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: #000000;
+}
+h5{
+  font-family: Montserrat;
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-family: $sans-serif-font;
+  font-weight: 500;
+}
+
+p{
+  font-family: $sans-serif-font;
+  font-size: 14px;
+  line-height: 1.71;
+  letter-spacing: 0.2px;
+  color: #000000;
+
+}
+
+
+.uppercase{
+
+  text-transform: uppercase !important;
+}
+
+.serif{
+  font-family: $serif-font !important;
+}
+
+.sans-serif{
+   font-family: $sans-serif-font !important;
+}
+
+
+.open-sans{
+  font-family: $open-sans !important;
+
+}
+
+.sm-only {
+  display: none !important;
+  @include respond-to(sm) { display: initial !important; }
+}
+.md-only {
+  display: none !important;
+  @include respond-to(md) { display: initial !important; }
+}
+.lg-only {
+  display: none !important;
+  @include respond-to(lg) { display: initial !important; }
+}
+
+.hide-sm {
+  @include respond-to(sm) { display: none !important; }
+}
+.hide-md {
+  @include respond-to(md) { display: none !important; }
+}
+.hide-lg {
+  @include respond-to(lg) { display: none !important; }
+}
+
+.test-class {
+  // color: $wh-red;
+}
+$test-var: #826;

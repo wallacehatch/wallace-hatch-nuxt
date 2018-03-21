@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css?family=Cardo:400');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
+
+$font-path: '/src/assets/fonts' !default;
+
+$serif-font: 'Cardo', serif;
+$sans-serif-font: 'Montserrat', sans-serif;
+$open-sans: 'Open Sans', sans-serif;
+
+$wh-black:             #000000;
+$wh-white:             #ffffff;
+$wh-grey-1:            #d8d8d8;
+$wh-grey-2:            #d1d1d1;
+$wh-footer-grey:       #908f90;
+$wh-red:               #dc3b31;
+$wh-green:             #7fb968;
+
+
+@mixin background-opacity($color, $opacity: 0.3) {
+    background: $color; /* The Fallback */
+    background: rgba($color, $opacity);
+}
+
+@mixin text-opacity($color, $opacity: 0.3) {
+    color: $color; /* The Fallback */
+    color: rgba($color, $opacity);
+}
+
+$lazy-dur-1: 0.5s;
+$lazy-dur-2: 0.75s;
+$lazy-dur-3: 1.3s;
+@mixin lazy-trans() {
+  transition: $lazy-dur-1 opacity cubic-bezier(.18,.72,.75,.4);
+}
+
+@mixin v-cont() {
+	padding: 0 3rem;
+	box-sizing: border-box;
+	@include respond-to(md) {padding: 0 2rem;}
+	@include respond-to(sm) {padding: 0 1.5rem;}
+}
+
+@mixin respond-to($media) {
+	@if $media == lg {
+		@media only screen and (max-width: 1440px) { @content; }
+	}
+	@else if $media == md {
+		@media only screen and (max-width: 1024px) { @content; }
+	}
+  @else if $media == lds {
+    @media only screen and (min-width: 450px) and (max-width: 766px) { @content; }
+  }
+	@else if $media == sm {
+		@media only screen and (max-width: 767px) { @content; }
+	}
+  @else if $media == 2x {
+    @media only screen and (-o-min-device-pixel-ratio: 5/4),
+
+           only screen and (-webkit-min-device-pixel-ratio: 1.25),
+
+           only screen and (min-device-pixel-ratio: 1.25),
+
+           only screen and (min-resolution: 1.25dppx) {
+
+        @content;
+    }
+  }
+  @else if $media == 3x {
+    @media only screen and (-o-min-device-pixel-ratio: 9/4),
+
+           only screen and (-webkit-min-device-pixel-ratio: 2.25),
+
+           only screen and (min-device-pixel-ratio: 2.25),
+
+           only screen and (min-resolution: 2.25dppx) {
+
+        @content;
+
+    }
+  }
+  @else if $media == 4x {
+  	@media only screen and (-o-min-device-pixel-ratio: 13/4),
+
+         only screen and (-webkit-min-device-pixel-ratio: 3.25),
+
+         only screen and (min-device-pixel-ratio: 3.25),
+
+         only screen and (min-resolution: 3.25dppx) {
+
+      @content;
+
+  	}
+  }
+
+}
+
+
+/* Text styles */
+@mixin h1 {
+	font-family: $serif-font;
+    font-size: 32px;
+    font-weight: 300;
+  	line-height: 1.19;
+  	letter-spacing: 10px;
+	  text-align: left;
+	  color: black;
+}
+
+@mixin h2 {
+	font-family: $serif-font;
+	font-size: 48px;
+	font-weight: 300;
+	line-height: 1.12;
+	letter-spacing: 1.5px;
+	text-align: left;
+	color: $wh-black;
+}
+
+@mixin h3 {
+	font-family: $serif-font;
+	font-size: 42px;
+	font-weight: 300;
+	line-height: 1.14;
+	letter-spacing: 1.2px;
+	text-align: left;
+	color: $wh-black;
+}
+
+@mixin h4 {
+	font-family: $serif-font;
+	font-size: 2.4rem;
+	font-weight: 300;
+	line-height: 1.19;
+	letter-spacing: 1px;
+	text-align: left;
+	color: $wh-black;
+}
+
+@mixin h5 {
+	font-family: $serif-font;
+	font-size: 28px;
+	font-weight: 300;
+	line-height: 1.07;
+	letter-spacing: 0.9px;
+	text-align: left;
+	color: $wh-black;
+}
+
+@mixin h6 {
+	font-family: $serif-font;
+	font-size: 22px;
+	font-weight: 300;
+	line-height: 1.27;
+	letter-spacing: 0.5px;
+	text-align: left;
+	color: $wh-black;
+}
+
+
+@mixin intro-text {
+	font-family: $sans-serif-font;
+	font-size: 18px;
+	letter-spacing: 4px;
+	color: $wh-black;
+}
+
+@mixin text-body {
+	font-family: 'Open Sans';
+	font-size: 14px;
+  line-height: 1.67;
+}
+
+@mixin text-quote {
+	font-family: $serif-font;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.33;
+	letter-spacing: 5px;
+}
+
+@mixin text-small {
+	font-family: $sans-serif-font;
+	font-size: 10px;
+	font-weight: 500;
+	line-height: 2.4;
+	letter-spacing: 0.2px;
+	text-align: center;
+
+}
+
+@mixin text-link {
+  font-family: $sans-serif-font;
+	font-size: 1.2rem;
+	letter-spacing: 3px;
+	text-align: center;
+	color: $wh-black;
+	text-transform: uppercase;
+}
