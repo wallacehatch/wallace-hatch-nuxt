@@ -223,10 +223,8 @@ export default {
     }
   }
 
-
     .insta-content-top-cont{
       overflow: auto;
-      padding-left: 1rem;
       padding-top: 1.5rem;
       .line{
         overflow: auto;
