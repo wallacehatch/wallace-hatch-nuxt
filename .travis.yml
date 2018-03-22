@@ -25,7 +25,7 @@ script:
   - docker --version  # document the version travis is using
   - if [ "$TRAVIS_BRANCH" = "master" ]; then URL_END=; fi
   - if [ "$TRAVIS_BRANCH" = "staging" ]; then URL_END=-staging; fi
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then then docker build --build-arg api_var=${API_PROD_URL} ad_id=${AD_ID}  -t frontend .; fi
+  # - if [ "$TRAVIS_BRANCH" = "master" ]; then URL_END=; fi
   - if [ "$TRAVIS_BRANCH" = "staging" ]; then docker build --build-arg api_var=${API_DEV_URL} ad_id=${AD_ID}  -t frontend .; fi
   - echo "${URL_END}"
   - export PATH=$PATH:$HOME/.local/bin # put aws in the path
