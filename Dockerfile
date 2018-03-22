@@ -4,6 +4,7 @@ FROM node:latest
 ARG api_var
 
 ENV API_URL=${api_var}
+RUN echo "api url is: ${API_URL}"
 
 ENV HOST 0.0.0.0
 
