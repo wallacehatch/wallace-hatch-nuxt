@@ -2,9 +2,10 @@ FROM node:latest
 
 
 ARG api_var
+ARG ad_id
 
 ENV API_URL=${api_var}
-RUN echo "api url is: ${API_URL}"
+ENV AD_ID=${ad_id}
 
 ENV HOST 0.0.0.0
 
