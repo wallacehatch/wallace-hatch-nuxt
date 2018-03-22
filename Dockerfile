@@ -1,12 +1,17 @@
 FROM node:latest
 
-ENV NODE_ENV=production
+
+# ARG api_var
+
+ENV API_URL=fuckoff
+
+
 ENV HOST 0.0.0.0
 
 RUN mkdir -p /app
 COPY . /app
 WORKDIR /app
-# Expose the app port
+
 EXPOSE 3000
 
 RUN npm install
