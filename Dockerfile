@@ -1,10 +1,9 @@
 FROM node:latest
 
 
-# ARG api_var
+ARG api_var
 
-ENV API_URL=fuckoff
-
+ENV API_URL=${api_var}
 
 ENV HOST 0.0.0.0
 
