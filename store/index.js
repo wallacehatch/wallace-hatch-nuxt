@@ -13,6 +13,10 @@ const state = {
 	contactModalActive: false,
 	couponModalActive: false,
 	cartModalActive: false,
+	instagramModal: {
+		active: false,
+		mediaId: "",
+	},
 	orderSuccessModal: {
 		active: false,
 		orderId: '00000000000123',
@@ -26,6 +30,10 @@ const mutations = {
 		state.orderSuccessModal.active = val.active ? val.active : false;
 		state.orderSuccessModal.orderId = val.orderId ? val.orderId : state.orderSuccessModal.orderId;
 		state.orderSuccessModal.customerName = val.customerName ? val.customerName : state.orderSuccessModal.customerName;
+	},
+	[types.SET_INSTAGRAM_MODAL_ACTIVE] (state, val) {
+		state.instagramModal.active = val.active ? val.active : false;
+		state.instagramModal.mediaId = val.mediaId ? val.mediaId : "";
 	},
 	[types.SET_COUPON_MODAL_ACTIVE] (state, val) {
 		state.couponModalActive = val;

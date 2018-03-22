@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="instagram-feed-cont">
       <a class="instagram-image" :class="{'four-tile': fourTile}" v-for="(post, i) in instagramPosts"
-      target="_blank" :href="'https://www.instagram.com/p/'+ post.node.shortcode + '/'"
+      target="_blank" @click="clickInstagramMedia(post.node.shortcode)"
       :style="{ 'background-image': 'url(' + post.node.display_url + ')' }">
       </a>
     <div class="insta-btn-wrapper" :class="{'four-tile': fourTile}">
@@ -16,9 +16,10 @@ export default {
   props: ['instagramPosts', 'fourTile'],
   methods: {
     clickInstagramMedia(mediaId) {
-      InstagramService.getInstagramMediaInfo(mediaId).then((result) => {
-          console.log("insta media info is");
-          console.log(result);
+      console.log("clicked insta " + mediaId)
+      this.$store.commit('SET_INSTAGRAM_MODAL_ACTIVE', {
+        active: true,
+        mediaId: mediaId,
       })
     }
   }

@@ -25,7 +25,7 @@ env:
 script:
   - docker --version  # document the version travis is using
   - if [ "$TRAVIS_BRANCH" = "master" ]; then docker build --build-arg api_var=${API_PROD_URL} --build-arg ad_id=${AD_ID}  -t frontend .; fi
-  - if [ "$TRAVIS_BRANCH" = "staging" ]; then docker build --build-arg api_var=${API_DEV_URL} --build-ar ad_id=${AD_ID}  -t frontend .; fi
+  - if [ "$TRAVIS_BRANCH" = "staging" ]; then docker build --build-arg api_var=${API_DEV_URL} --build-arg ad_id=${AD_ID}  -t frontend .; fi
 
 after_success:
     - if [ "$TRAVIS_BRANCH" = "master" ]; then URL_END=; fi
