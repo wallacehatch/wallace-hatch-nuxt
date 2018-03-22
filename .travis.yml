@@ -24,18 +24,22 @@ env:
 script:
   - docker --version  # document the version travis is using
   - if [ "$TRAVIS_BRANCH" = "master" ]; then URL_END=; fi
-  - if [ "$TRAVIS_BRANCH" = "staging" ]; then URL_END=-staging docker build --build-arg api_var=${API_DEV_URL}  -t frontend .; fi
+  - if [ "$TRAVIS_BRANCH" = "staging" ]; then URL_END=-staging; fi
 
-  - export PATH=$PATH:$HOME/.local/bin # put aws in the path
-  - eval $(aws ecr get-login --no-include-email  --region us-east-1) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
-  - docker tag frontend:latest 145054867171.dkr.ecr.us-east-1.amazonaws.com/wallace-hatch-frontend${URL_END}:V_${TRAVIS_BUILD_NUMBER}
-  - docker push 145054867171.dkr.ecr.us-east-1.amazonaws.com/wallace-hatch-frontend${URL_END}
-  - sed -i -e 's|KUBE_CERTIFICATE_AUTHORITY_DATA|'"${KUBE_CERTIFICATE_AUTHORITY_DATA}"'|g' kubeconfig
-  - sed -i -e 's|KUBE_CLIENT_AUTHORITY_DATA|'"${KUBE_CLIENT_AUTHORITY_DATA}"'|g' kubeconfig
-  - sed -i -e 's|KUBE_CLIENT_KEY_DATA|'"${KUBE_CLIENT_KEY_DATA}"'|g' kubeconfig
-  - sed -i -e 's|KUBE_USER_NAME|'"${KUBE_USER_NAME}"'|g' kubeconfig
-  - sed -i -e 's|KUBE_USER_PASSWORD|'"${KUBE_USER_PASSWORD}"'|g' kubeconfig
-  - /usr/local/bin/kubectl --kubeconfig kubeconfig set image deployment/frontend-deployment${URL_END} frontend-container${URL_END}=145054867171.dkr.ecr.us-east-1.amazonaws.com/wallace-hatch-frontend${URL_END}:V_${TRAVIS_BUILD_NUMBER}
+
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then URL_END=; fi
+  - if [ "$TRAVIS_BRANCH" = "staging" ]; then docker build --build-arg api_var=${API_DEV_URL}  -t frontend .; fi
+  - echo "${URL_END}"
+  # - export PATH=$PATH:$HOME/.local/bin # put aws in the path
+  # - eval $(aws ecr get-login --no-include-email  --region us-east-1) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
+  # - docker tag frontend:latest 145054867171.dkr.ecr.us-east-1.amazonaws.com/wallace-hatch-frontend${URL_END}:V_${TRAVIS_BUILD_NUMBER}
+  # - docker push 145054867171.dkr.ecr.us-east-1.amazonaws.com/wallace-hatch-frontend${URL_END}
+  # - sed -i -e 's|KUBE_CERTIFICATE_AUTHORITY_DATA|'"${KUBE_CERTIFICATE_AUTHORITY_DATA}"'|g' kubeconfig
+  # - sed -i -e 's|KUBE_CLIENT_AUTHORITY_DATA|'"${KUBE_CLIENT_AUTHORITY_DATA}"'|g' kubeconfig
+  # - sed -i -e 's|KUBE_CLIENT_KEY_DATA|'"${KUBE_CLIENT_KEY_DATA}"'|g' kubeconfig
+  # - sed -i -e 's|KUBE_USER_NAME|'"${KUBE_USER_NAME}"'|g' kubeconfig
+  # - sed -i -e 's|KUBE_USER_PASSWORD|'"${KUBE_USER_PASSWORD}"'|g' kubeconfig
+  # - /usr/local/bin/kubectl --kubeconfig kubeconfig set image deployment/frontend-deployment${URL_END} frontend-container${URL_END}=145054867171.dkr.ecr.us-east-1.amazonaws.com/wallace-hatch-frontend${URL_END}:V_${TRAVIS_BUILD_NUMBER}
 
 
 
