@@ -6,6 +6,9 @@
     <no-ssr>
       <coupon-modal @close="$store.commit('SET_COUPON_MODAL_ACTIVE',false)"></coupon-modal>
     </no-ssr>
+    <no-ssr>
+    <instagram-modal @close="$store.commit('SET_INSTAGRAM_MODAL_ACTIVE',{})"></instagram-modal>
+  </no-ssr>
     <site-header :active="$store.state.navActive"></site-header>
     <nuxt/>
     <site-footer></site-footer>
@@ -16,6 +19,7 @@
 import SiteHeader from '@/components/common/SiteHeader';
 import SiteFooter from '@/components/common/SiteFooter';
 import OrderSuccessModal from '@/components/common/orderSuccessModal/Modal';
+import InstagramModal from '@/components/common/instagramModal/Modal';
 import CouponModal from '@/components/common/couponModal/Modal';
 import BagService from '@/BagService';
 import StripeService from '@/StripeService';
@@ -30,7 +34,7 @@ export default {
     SiteFooter,
     OrderSuccessModal,
     CouponModal,
-
+    InstagramModal,
   },
   data() {
     return {

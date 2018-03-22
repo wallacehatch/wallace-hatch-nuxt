@@ -1,3 +1,4 @@
+require('dotenv').config()
 module.exports = {
 
   head: {
@@ -14,7 +15,6 @@ module.exports = {
       { property: 'og:url', content: 'https://wallacehatch.com/' },
       { property: 'og:site_name', content: 'Wallace Hatch' },
       { hid: 'description', name: 'description', content: "Chic, elegant, and premium style at an exceedingly reasonable price — the perfect companion for tomorrow’s adventure." },
-
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: 'https://d3dty8fv62xana.cloudfront.net/WH_mark-32x32.png' }
@@ -52,14 +52,12 @@ module.exports = {
     //   return { x: 0, y: 0 }
     // }
   },
-
   env: {
-    API_URL: 'https://api-staging.wallacehatch.com/',
-    AD_ID: 'AW-812669170',
+    API_URL: process.env.API_URL,
+    AD_ID: process.env.AD_ID,
   },
-
   build: {
-    vendor: ['vee-validate', 'vue-lazyload', 'vue-the-mask', 'vue-touch', 'vue2-filters', 'axios', 'animejs'],
+    // vendor: ['vee-validate', 'vue-lazyload', 'vue-the-mask', 'vue-touch', 'vue2-filters', 'axios', 'animejs'],
     // extend (config, { isDev, isClient }) {
     //   if (isDev && isClient) {
     //     config.module.rules.push({
