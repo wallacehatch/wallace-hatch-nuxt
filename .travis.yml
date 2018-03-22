@@ -23,7 +23,6 @@ env:
 
 script:
   - docker --version  # document the version travis is using
-
   - if [ "$TRAVIS_BRANCH" = "master" ]; then URL_END=; fi
   - if [ "$TRAVIS_BRANCH" = "staging" ]; then URL_END=-staging docker build --build-arg api_var=${API_DEV_URL}  -t wh-nuxt .; fi
 
