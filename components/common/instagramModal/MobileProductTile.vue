@@ -29,11 +29,8 @@ export default {
         active: false,
         mediaId: "",
       })
-
-      this.$router.push('/watches/' + this.item.id + '/' + this.item.skus.data[0].id);
-
+      this.$router.push('/watches/' + this.item.id + '-' + this.item.skus.data[0].id);
     }
-
   },
 }
 </script>

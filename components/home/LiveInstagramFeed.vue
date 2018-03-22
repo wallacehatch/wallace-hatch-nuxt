@@ -16,7 +16,6 @@ export default {
   props: ['instagramPosts', 'fourTile'],
   methods: {
     clickInstagramMedia(mediaId) {
-      console.log("clicked insta " + mediaId)
       this.$store.commit('SET_INSTAGRAM_MODAL_ACTIVE', {
         active: true,
         mediaId: mediaId,
