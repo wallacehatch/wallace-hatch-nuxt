@@ -47,11 +47,6 @@ module.exports = {
   {src: '@/plugins/facebookPixel', ssr: false},
   {src: '@/plugins/vue-touch', ssr: false}],
 
-  router: {
-    // scrollBehavior: function (to, from, savedPosition) {
-    //   return { x: 0, y: 0 }
-    // }
-  },
   env: {
     API_URL: process.env.API_URL,
     AD_ID: process.env.AD_ID,
