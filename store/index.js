@@ -32,8 +32,15 @@ const mutations = {
 		state.orderSuccessModal.customerName = val.customerName ? val.customerName : state.orderSuccessModal.customerName;
 	},
 	[types.SET_INSTAGRAM_MODAL_ACTIVE] (state, val) {
-		state.instagramModal.active = val.active ? val.active : false;
-		state.instagramModal.mediaId = val.mediaId ? val.mediaId : "";
+		console.log("changing modal "+ val.active + " " + val.mediaId)
+		if (val.active == null) {
+			console.log("is null")
+			val.active = false
+			val.mediaId = ""
+		}
+		state.instagramModal.active = val.active ? val.active :  false,
+		state.instagramModal.mediaId = val.mediaId ? val.mediaId : state.instagramModal.mediaId,
+		console.log(state.instagramModal.active + state.instagramModal.mediaId)
 	},
 	[types.SET_COUPON_MODAL_ACTIVE] (state, val) {
 		state.couponModalActive = val;

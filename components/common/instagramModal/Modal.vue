@@ -11,7 +11,7 @@
                <p class="caption">{{instagramInfo.location}}</p>
             </div>
          </div>
-         <div class="insta-image" :style="{backgroundImage: 'url(' + instagramInfo.picture_url + ')'}"></div>
+         <div class="insta-image"  v-lazy:background-image="instagramInfo.picture_url"></div>
          <div class="insta-content-cont">
             <div class="insta-content-top-cont hide-sm">
                <div class="oval">

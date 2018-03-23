@@ -1,6 +1,6 @@
 <template lang="html">
 <div class="insta-product-cont">
-  <div class="product-image" :style="{backgroundImage: 'url(' + item.images[0] + ')'}" @click="handleProductClick"></div>
+  <div class="product-image" v-lazy:background-image="item.images[0]"  @click="handleProductClick"></div>
   <div class="info">
     <p class="size">40 MM</p>
     <p class="name">{{item.name}}</p>
