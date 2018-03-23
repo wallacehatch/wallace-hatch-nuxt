@@ -1,5 +1,5 @@
 <template lang="html">
-<div class="insta-product-cont">
+<div class="insta-product-cont" @click="handleProductClick">
   <div class="product-image" v-lazy:background-image="item.images[0]"  @click="handleProductClick"></div>
   <div class="info">
     <p class="size">40 MM</p>
@@ -43,6 +43,9 @@ export default {
   background-color: #ffffff;
   border: solid 1px #dbdbdb;
   margin-bottom: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
 
   .product-image{
     display: inline-block;
