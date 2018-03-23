@@ -1,13 +1,13 @@
 <template>
   <div>
-    <site-header :active="$store.state.navActive"></site-header>
+    <!-- <site-header :active="$store.state.navActive"></site-header> -->
 
     <div v-if="error.statusCode === 404" class="site-cont fof-cont clearfix">
       <div class="fof-left-cont">
         <p class="error-text-1">404 Error</p>
         <p class="error-text-2">Yeah... something<br>went wrong</p>
         <p class="error-text-3">Our timing might be off</p>
-        <nuxt-link class="home-btn" to="/">Home Page</nuxt-link>
+        <nuxt-link class="home-btn" to="/">Take Me Home</nuxt-link>
       </div>
       <div class="fof-right-cont"></div>
     </div>
@@ -15,21 +15,14 @@
       <h1>Error: {{error.statusCode}}</h1>
     </div>
 
-    <site-footer></site-footer>
+    <!-- <site-footer></site-footer> -->
   </div>
 </template>
 
 <script>
-import SiteHeader from '@/components/common/SiteHeader';
-import SiteFooter from '@/components/common/SiteFooter';
-
 export default {
   name: 'app',
   props: ['error'],
-  components: {
-    SiteHeader,
-    SiteFooter,
-  },
   fetch({store, params}) {
     store.commit('SET_NAV_LAYOUT', 0);
   }
