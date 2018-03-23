@@ -32,8 +32,8 @@ const mutations = {
 		state.orderSuccessModal.customerName = val.customerName ? val.customerName : state.orderSuccessModal.customerName;
 	},
 	[types.SET_INSTAGRAM_MODAL_ACTIVE] (state, val) {
-		state.instagramModal.active = val.active ? val.active :  false,
-		state.instagramModal.mediaId = val.mediaId ? val.mediaId : state.instagramModal.mediaId,
+		state.instagramModal.active = val.active ? val.active :  false;
+		state.instagramModal.mediaId = val.mediaId ? val.mediaId : state.instagramModal.mediaId;
 	},
 	[types.SET_COUPON_MODAL_ACTIVE] (state, val) {
 		state.couponModalActive = val;
