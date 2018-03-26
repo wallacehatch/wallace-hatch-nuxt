@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- <site-header :active="$store.state.navActive"></site-header> -->
-
     <div v-if="error.statusCode === 404" class="site-cont fof-cont clearfix">
       <div class="fof-left-cont">
         <p class="error-text-1">404 Error</p>
@@ -14,8 +12,6 @@
     <div v-else class="site-cont">
       <h1>Error: {{error.statusCode}}</h1>
     </div>
-
-    <!-- <site-footer></site-footer> -->
   </div>
 </template>
 
