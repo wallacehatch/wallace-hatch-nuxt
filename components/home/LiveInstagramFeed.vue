@@ -85,6 +85,7 @@ export default {
       box-shadow: 0 2px 6px 0 rgba(149,149,149,0.30), 0 12px 24px 0 rgba(95,95,95,0.70);
       transform: translateY(-8px);
       z-index: 2;
+      cursor: pointer;
     }
     &:nth-of-type(n + 6):hover {
       transform: translateY(8px);
