@@ -38,32 +38,32 @@
           </div>
           <div class="how-to-wear-images-cont" v-if="product">
             <a target="_blank"
-              :href="'https://instagram.com/p/' + product.metadata.howToWear.split(',')[0]"
+              @click="clickInstagramMedia(product.metadata.howToWear.split(',')[0])"
               :style="{backgroundImage: 'url(https://instagram.com/p/' + product.metadata.howToWear.split(',')[0] + '/media)'}"
               class="how-to-wear-image">
             </a>
             <a target="_blank"
-              :href="'https://instagram.com/p/' + product.metadata.howToWear.split(',')[1]"
+              @click="clickInstagramMedia(product.metadata.howToWear.split(',')[1])"
               :style="{backgroundImage: 'url(https://instagram.com/p/' + product.metadata.howToWear.split(',')[1] + '/media)'}"
               class="how-to-wear-image">
             </a>
             <a target="_blank"
-              :href="'https://instagram.com/p/' + product.metadata.howToWear.split(',')[2]"
+              @click="clickInstagramMedia(product.metadata.howToWear.split(',')[2])"
               :style="{backgroundImage: 'url(https://instagram.com/p/' + product.metadata.howToWear.split(',')[2] + '/media)'}"
               class="how-to-wear-image">
             </a>
             <a target="_blank"
-              :href="'https://instagram.com/p/' + product.metadata.howToWear.split(',')[3]"
+              @click="clickInstagramMedia(product.metadata.howToWear.split(',')[3])"
               :style="{backgroundImage: 'url(https://instagram.com/p/' + product.metadata.howToWear.split(',')[3] + '/media)'}"
               class="how-to-wear-image">
             </a>
             <a target="_blank"
-              :href="'https://instagram.com/p/' + product.metadata.howToWear.split(',')[4]"
+              @click="clickInstagramMedia(product.metadata.howToWear.split(',')[4])"
               :style="{backgroundImage: 'url(https://instagram.com/p/' + product.metadata.howToWear.split(',')[4] + '/media)'}"
               class="how-to-wear-image">
             </a>
             <a target="_blank"
-              :href="'https://instagram.com/p/' + product.metadata.howToWear.split(',')[5]"
+              @click="clickInstagramMedia(product.metadata.howToWear.split(',')[5])"
               :style="{backgroundImage: 'url(https://instagram.com/p/' + product.metadata.howToWear.split(',')[5] + '/media)'}"
               class="how-to-wear-image">
             </a>
