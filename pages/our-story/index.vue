@@ -83,6 +83,16 @@
 import LiveInstagramFeed from '@/components/home/LiveInstagramFeed';
 import InstagramService from '@/InstagramService';
 export default {
+  head() {
+    return {
+      title: 'Our Story - Wallace Hatch',
+      meta: [
+        { hid: 'og-title', property: 'og:title', content: 'Our Story - Wallace Hatch'},
+        { hid: 'og-description', property: 'og:description', content: 'Designed in Columbus, Ohio - Our mission is to Be More than just a choice in style' },
+        {hid: 'description', name: 'description', content: 'Designed in Columbus, Ohio - Our mission is to Be More than just a choice in style'}
+      ]
+    }
+  },
   components: {
     LiveInstagramFeed,
   },

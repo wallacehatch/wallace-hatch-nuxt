@@ -34,7 +34,7 @@
           <hr class="line">
           <div class="how-to-wear-header">
             <p class="pdp-info-title">How to wear</p>
-            <p class="hashtag"><no-ssr><i class="fab fa-instagram"></i></no-ssr> #{{product.metadata.hashtag}}</p>
+            <no-ssr><p class="hashtag"><i class="fab fa-instagram"></i> #{{product.metadata.hashtag}}</p></no-ssr>
           </div>
           <div class="how-to-wear-images-cont" v-if="product">
             <a target="_blank"
@@ -88,29 +88,43 @@ import ProductInfoTable from '@/components/product/ProductInfoTable';
 import BandSection from '@/components/bands/BandSection';
 import ProductImage from '@/components/product/ProductImage';
 export default {
-   name: 'ProductPage',
-   components: {
-     ProductInfoTable,
-     BandSection,
-     ProductImage,
-   },
-   asyncData({params}) {
-     const [handle, sku] = params.handleSku.split('-')
-     return { handle,sku }
-   },
-   data () {
-    return {
-      product: null,
-      handle: null,
-      sku: null,
-      currentSkuIndex: null,
-      productInfo: null,
-      stickyAddCart: false,
-      addCartOffset: null,
-
-      activeImageIndex: 0,
-      lastMobileImageHeight: 0,
-    }
+    head() {
+      return {
+        title: this.product.name + ' - Wallace Hatch',
+        meta: [
+          { hid: 'og-title', property: 'og:title', content: this.product.name + ' - Wallace Hatch'},
+          { hid: 'og-description', property: 'og:description', content: this.product.description },
+          {hid: 'description', name: 'description', content: this.product.description}
+        ]
+      }
+    },
+    name: 'ProductPage',
+    components: {
+      ProductInfoTable,
+      BandSection,
+      ProductImage,
+    },
+    asyncData({params, error}) {
+      const [handle, sku] = params.handleSku.split('-');
+      return StripeService.getProduct(handle).then((result) => {
+        const product = result.data;
+        const currentSkuIndex = BagService.indexForSku(product, sku);
+        const stickyAddCart = false;
+        return { handle,sku,product,currentSkuIndex,stickyAddCart }
+      }, (err) => { debugger; })
+    },
+    data () {
+      return {
+        product: null,
+        handle: null,
+        sku: null,
+        currentSkuIndex: null,
+        productInfo: null,
+        stickyAddCart: false,
+        addCartOffset: null,
+        activeImageIndex: 0,
+        lastMobileImageHeight: 0,
+      }
   },
   mounted() {
     this.setSkuNav(this.sku)
@@ -118,7 +132,7 @@ export default {
     window.fbq && window.fbq('track', 'ViewContent');
   },
   beforeMount() {
-    this.loadSku(this.sku);
+    this.setButtonOffset();
     this.$store.commit('SET_NAV_LAYOUT', 0);
     window.addEventListener('scroll', this.handleScroll);
   },
@@ -131,29 +145,15 @@ export default {
         document.getElementById('pdp_lazy_1').setAttribute('lazy', 'loaded')
       })
     },
-    loadSku(sku) {
-      this.setSkuNav(sku)
-      StripeService.getProduct(this.handle).then((result) => {
-        this.currentSkuIndex = BagService.indexForSku(result.data, sku);
-        this.product = result.data;
-        this.stickyAddCart = false;
-        this.setButtonOffset();
-      }, (err) => {
-        debugger;
-      })
-    },
     setSkuNav(sku) {
       switch (sku.toUpperCase()) {
         case 'WR140S':
-        // this.$emit('setNav',1);
         this.$store.commit('SET_NAV_ACTIVE', 1);
         break;
         case 'BR140P':
-        // this.$emit('setNav',2);
         this.$store.commit('SET_NAV_ACTIVE', 2);
         break;
         case 'BB140S':
-        // this.$emit('setNav',3);
         this.$store.commit('SET_NAV_ACTIVE', 3);
         break;
       }
@@ -183,11 +183,6 @@ export default {
       this.$store.commit('SET_CART_ACTIVE', true);
     }
   },
-  // watch: {
-  //   '$route.params.sku' (newSku) {
-  //     this.loadSku(newSku);
-  //   }
-  // }
 }
 </script>
 

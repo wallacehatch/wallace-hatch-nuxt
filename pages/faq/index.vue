@@ -10,6 +10,22 @@
 <script>
 import FaqItem from '@/components/faq/FaqItem';
 export default {
+  head() {
+    return {
+      title: 'Frequently Asked Questions - Wallace Hatch',
+      meta: [
+        { hid: 'og-title', property: 'og:title', content: 'Frequently Asked Questions - Wallace Hatch'},
+        { hid: 'og-description', property: 'og:description', content: 'When will my order ship? After your payment is verified, \
+        it takes up to 24 hours to process and ship your order. This does not include weekends or holidays. Purchases made \
+        after 9 am PST will not be shipped out until the next business day. If you order after 9 am PST on a Friday, your order \
+        will likely be shipped out on the following Monday.' },
+        {hid: 'description', name: 'description', content: 'When will my order ship? After your payment is verified, \
+        it takes up to 24 hours to process and ship your order. This does not include weekends or holidays. Purchases made \
+        after 9 am PST will not be shipped out until the next business day. If you order after 9 am PST on a Friday, your order \
+        will likely be shipped out on the following Monday.'}
+      ]
+    }
+  },
   components: {
     FaqItem,
   },
