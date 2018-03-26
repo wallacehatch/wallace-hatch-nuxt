@@ -3,10 +3,10 @@
     <h3 class="section-title">Terms & Conditions</h3>
 
     <h4 class="body-section-title">Introduction</h4>
-    <p class="body-info">These terms of use governs your purchases from, and your use of, the www.wallacehatch.com website and forms a contract between you and Wallace Hatch INC (hereinafter “Wallace Hatch”). By making a purchase from, and using, this website you have agreed to these terms of use. Please make sure that you have read and understood these terms of use when using our site.</p>
+    <p class="body-info">These terms of use governs your purchases from, and your use of, the www.wallacehatch.com website and forms a contract between you and Wallace Hatch LLC (hereinafter “Wallace Hatch”). By making a purchase from, and using, this website you have agreed to these terms of use. Please make sure that you have read and understood these terms of use when using our site.</p>
 
     <h4 class="body-section-title">Payment</h4>
-    <p class="body-info">All payments are handled by Stripe. Wallace Hatch inc. does now store any credit card numbers</p>
+    <p class="body-info">All payments are handled by Stripe. Wallace Hatch does now store any credit card numbers</p>
     <p class="body-info">Pay with your Visa, MasterCard, American Express, JCB, Discover, or Diners Club securely over the Internet. Your payment is handled by Stripe with secure encryption and under strict banking standards. Your card details are sent directly to the bank and cannot be read or accessed by anyone other than your bank. There is no extra charge for card payments. When paying by credit / debit card starting conditions apply as soon as the card transaction is approved. In the event that no payment has been received after submitting your order, Wallace Hatch may automatically cancel your order.</p>
     <p class="body-info">For further questions about how our partners handle information please contact Stripe support.</p>
 
@@ -55,9 +55,22 @@
 
 <script>
 export default {
-  mounted() {
-    window.scrollTo(0,0);
-  }
+  head() {
+    return {
+      title: 'Terms & Conditions - Wallace Hatch',
+      meta: [
+        { hid: 'og-title', property: 'og:title', content: 'Terms & Conditions - Wallace Hatch'},
+        { hid: 'og-description', property: 'og:description', content: 'These terms of use governs your purchases from, \
+        and your use of, the www.wallacehatch.com website and forms a contract between you and Wallace Hatch LLC \
+        (hereinafter “Wallace Hatch”). By making a purchase from, and using, this website you \
+        have agreed to these terms of use. Please make sure that you have read and understood these terms of use when using our site.' },
+        {hid: 'description', name: 'description', content: 'These terms of use governs your purchases from, \
+        and your use of, the www.wallacehatch.com website and forms a contract between you and Wallace Hatch LLC \
+        (hereinafter “Wallace Hatch”). By making a purchase from, and using, this website you \
+        have agreed to these terms of use. Please make sure that you have read and understood these terms of use when using our site.'}
+      ]
+    }
+  },
 }
 </script>
 

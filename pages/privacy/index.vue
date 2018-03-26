@@ -32,10 +32,20 @@
 
 <script>
 export default {
-  // scrollToTop: true,
-  // mounted() {
-  //   window.scrollTo(0,0);
-  // }
+  head() {
+    return {
+      title: 'Privacy Policy - Wallace Hatch',
+      meta: [
+        { hid: 'og-title', property: 'og:title', content: 'Privacy Policy - Wallace Hatch'},
+        { hid: 'og-description', property: 'og:description', content: 'Personal Information: At Wallace Hatch we are dedicated to create a safe and \
+        enjoyable shopping experience for you. In this text we want to inform you about our website procedures; \
+        what we do, how we do it and how it affects you.' },
+        {hid: 'description', name: 'description', content: 'Personal Information: At Wallace Hatch we are dedicated to create a safe and \
+        enjoyable shopping experience for you. In this text we want to inform you about our website procedures; \
+        what we do, how we do it and how it affects you.'}
+      ]
+    }
+  },
 }
 </script>
 

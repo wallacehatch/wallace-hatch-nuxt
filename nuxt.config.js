@@ -9,11 +9,11 @@ module.exports = {
       { name: 'google-site-verification', content: 'xDDrCzPOdOiXABDCA0xDxBjUFOyoiFhMNJPFTFZPaGU' },
       { property: 'og:image', content: 'http://s3.us-east-2.amazonaws.com/wallace-hatch/hero-image-1w.jpg' },
       { property: 'og:image:secure_url', content: 'https://s3.us-east-2.amazonaws.com/wallace-hatch/hero-image-1w.jpg' },
-      { property: 'og:title', content: 'Wallace Hatch - Elegant watches, Affordable prices' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:description', content: 'Chic, elegant, and premium style at an exceedingly reasonable price — the perfect companion for tomorrow’s adventure.' },
       { property: 'og:url', content: 'https://wallacehatch.com/' },
       { property: 'og:site_name', content: 'Wallace Hatch' },
+      { hid: 'og-title', property: 'og:title', content: 'Wallace Hatch - Elegant watches, Affordable prices' },
+      { hid: 'og-description', property: 'og:description', content: 'Chic, elegant, and premium style at an exceedingly reasonable price — the perfect companion for tomorrow’s adventure.' },
       { hid: 'description', name: 'description', content: "Chic, elegant, and premium style at an exceedingly reasonable price — the perfect companion for tomorrow’s adventure." },
     ],
     link: [
