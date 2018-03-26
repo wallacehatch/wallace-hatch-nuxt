@@ -1,5 +1,5 @@
 <template lang="html">
-<div class="insta-product-cont-mobile">
+<div class="insta-product-cont-mobile" @click="handleProductClick">
   <div class="product-image" :style="{backgroundImage: 'url(' + item.images[0] + ')'}" @click="handleProductClick"></div>
   <div class="info">
     <p class="size">40 MM</p>
