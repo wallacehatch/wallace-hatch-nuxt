@@ -1,6 +1,6 @@
 <template lang="html">
-<div class="insta-product-cont">
-  <div class="product-image" v-lazy:background-image="item.images[0]"  @click="handleProductClick"></div>
+<div class="insta-product-cont" @click="handleProductClick">
+  <div class="product-image" v-lazy:background-image="item.images[0]"></div>
   <div class="info">
     <p class="size">40 MM</p>
     <p class="name">{{item.name}}</p>
@@ -43,6 +43,7 @@ export default {
   background-color: #ffffff;
   border: solid 1px #dbdbdb;
   margin-bottom: 1rem;
+  &:hover { cursor: pointer; }
 
   .product-image{
     display: inline-block;
@@ -55,9 +56,6 @@ export default {
     width: 99px;
     height: 124px;
     overflow: auto;
-    &:hover {
-      cursor: pointer;
-    }
   }
   .info {
     margin-top: 2.1rem;

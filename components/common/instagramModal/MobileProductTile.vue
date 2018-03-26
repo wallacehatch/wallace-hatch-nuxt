@@ -1,6 +1,6 @@
 <template lang="html">
-<div class="insta-product-cont-mobile">
-  <div class="product-image" :style="{backgroundImage: 'url(' + item.images[0] + ')'}" @click="handleProductClick"></div>
+<div class="insta-product-cont-mobile" @click="handleProductClick">
+  <div class="product-image" :style="{backgroundImage: 'url(' + item.images[0] + ')'}"></div>
   <div class="info">
     <p class="size">40 MM</p>
     <p class="name">{{item.name}}</p>
@@ -40,6 +40,7 @@ export default {
 
 .insta-product-cont-mobile{
    margin: 0 1rem;
+   &:hover { cursor: pointer; }
   .product-image{
     display: inline-block;
     background-position: center;
