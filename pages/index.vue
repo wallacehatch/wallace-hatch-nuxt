@@ -25,6 +25,7 @@
 import ProductTile from '@/components/home/ProductTile';
 import ExperienceSection from '@/components/home/ExperienceSection';
 import StripeService from '@/StripeService.js';
+import ReviewService from '@/ReviewService.js';
 import HeroCarousel from '@/components/home/HeroCarousel';
 export default {
   components: {
