@@ -6618,7 +6618,7 @@ vue-the-mask@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/vue-the-mask/-/vue-the-mask-0.11.1.tgz#91ee01008354ae57bccc79bb61b65f32d971d9d5"
 
-vue-touch@next:
+vue-touch@^2.0.0-beta.4:
   version "2.0.0-beta.4"
   resolved "https://registry.yarnpkg.com/vue-touch/-/vue-touch-2.0.0-beta.4.tgz#0259a5fbf89fed12d5e5d789fffb99b874ae0501"
   dependencies:
