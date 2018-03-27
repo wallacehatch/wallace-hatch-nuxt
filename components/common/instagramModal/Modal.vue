@@ -130,6 +130,7 @@ export default {
 .insta-modal-cont {
   clear: both;
   max-width: 86rem;
+  max-height: 60rem;
     @include respond-to(sm) {
       width: 90.6%;
     }
