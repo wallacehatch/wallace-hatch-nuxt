@@ -1,6 +1,6 @@
 <template lang="html">
-   <div v-show="lActive" id="insta_modal_mask" class="insta-modal-mask">
-      <div class="insta-modal-cont">
+   <div v-show="lActive" id="insta_modal_mask" class="insta-modal-mask" @click="$emit('close')">
+      <div class="insta-modal-cont" @click.stop>
          <div class="close-btn" @click="$emit('close')"><i class="fal fa-times"></i></div>
          <div class="insta-content-top-cont-mobile sm-only">
             <div class="oval">
@@ -11,7 +11,7 @@
                <p class="caption">{{instagramInfo.location}}</p>
             </div>
          </div>
-         <div class="insta-image"  v-lazy:background-image="instagramInfo.picture_url"></div>
+         <div class="insta-image" v-lazy:background-image="instagramInfo.picture_url || ''"></div>
          <div class="insta-content-cont">
             <div class="insta-content-top-cont hide-sm">
                <div class="oval">
@@ -27,7 +27,6 @@
               <div class="products-cont-mobile sm-only">
                 <div  v-for="(item, i) in instagramInfo.products">
                   <mobile-product-tile :key="'pTile' + i" :item="item"></mobile-product-tile>
-                  <!-- {{instagramInfo.products.length}} -->
                   <div class="divider" v-if="i < instagramInfo.products.length && i > 0"></div>
                 </div>
               </div>
@@ -56,9 +55,7 @@ export default {
       lActive: false,
       dur: 500,
       instagramInfo: {
-        caption: "",
         picture_url: "",
-        products: null,
       },
     }
   },

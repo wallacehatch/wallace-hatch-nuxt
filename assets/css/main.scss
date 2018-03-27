@@ -125,7 +125,32 @@ p{
   @include respond-to(lg) { display: none !important; }
 }
 
-.test-class {
-  // color: $wh-red;
+
+// COMPONENT CSS CLASSES
+// ------------------------------------------
+
+.cta-btn-2 {
+  box-shadow: 0 17px 20px 0 rgba(0, 0, 0, 0.1), 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border: solid 2px #000000;
+  // min-width: 18rem;
+  padding: 1.6rem 1rem;
+  text-align: center;
+  box-sizing: border-box;
+  @include intro-text;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  font-weight: bold;
+  transition: 0.2s all linear;
+  @include respond-to(lg) { font-size: 1.2rem; }
+  @include respond-to(md) {padding-top: 1.4rem; padding-bottom: 1.4rem;}
+  @include respond-to(sm) { font-size: 1.1rem; padding-top: 1.3rem; padding-bottom: 1.3rem; letter-spacing: 0.5px;}
+  &:hover {
+    cursor: pointer;
+    background-color: #000000;
+    color: #fff;
+    box-shadow: 0 27px 20px 0 rgba(0, 0, 0, 0.1), 0 4px 14px 0 rgba(0, 0, 0, 0.2);
+  }
 }
-$test-var: #826;
