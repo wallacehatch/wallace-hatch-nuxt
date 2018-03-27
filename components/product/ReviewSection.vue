@@ -3,9 +3,9 @@
   <div class="product-reviews-cont">
     <div class="reviews-header-cont clearfix">
       <div class="left-cont">
-        <review-stars class="review-header-stars" rating="3.4">
-          <span class="review-count" slot="before">21 Reviews</span>
-          <span class="rating-text" slot="after">/ 4.5 out of 5 Stars</span>
+        <review-stars class="review-header-stars" :rating="averageRating">
+          <span class="review-count" slot="before">{{reviews.length}} Review<span v-if="reviews.length !== 1">s</span></span>
+          <span class="rating-text" slot="after">/ {{averageRating}} out of 5 Stars</span>
         </review-stars>
         <div class="recommend-cont">
           <no-ssr><i class="fal fa-check icon"></i></no-ssr>
@@ -17,9 +17,7 @@
       <div class="cta-btn-2 ml sm-only">Write a Review</div>
     </div>
     <div class="reviews-body-cont">
-      <review-tile></review-tile>
-      <review-tile></review-tile>
-      <review-tile></review-tile>
+      <review-tile v-for="(review,i) in reviews" :key="i" :review="review"></review-tile>
     </div>
     <div class="reviews-footer-cont">
       <div class="cta-btn-2">Read all Reviews</div>
@@ -34,10 +32,32 @@ import SectionCont from './SectionCont';
 import ReviewStars from './ReviewStars';
 import ReviewTile from './ReviewTile';
 export default {
+  props: ['reviews'],
   components: {
     SectionCont,
     ReviewStars,
     ReviewTile,
+  },
+  data() {
+    return {
+      averageRating: 0,
+    }
+  },
+  methods: {
+    populateReviewData(reviews) {
+      this.averageRating = reviews.reduce((total, review) => {
+        console.log(review.star_rating / reviews.length);
+        return total + review.star_rating / reviews.length
+      },0).precisionRound(1)
+    }
+  },
+  beforeMount() {
+    this.populateReviewData(this.reviews);
+  },
+  watch: {
+    'reviews' (newReviews) {
+      this.populateReviewData(newReviews);
+    }
   }
 }
 </script>

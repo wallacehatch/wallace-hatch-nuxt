@@ -41,16 +41,12 @@ export default {
       navActive: 0,
     }
   },
-  methods: {
-    // setNavActive(i) {
-    //   console.log('setting nav active');
-    //   this.navActive = i;
-    // },
-
-  },
-
   beforeMount() {
-    console.log('mounting default layout');
+    Number.prototype.precisionRound = function(precision) {
+      var factor = Math.pow(10, precision);
+      return Math.round(this * factor) / factor;
+    }
+
     const bag = BagService.getBag();
     if (bag === null) return;
     const bn = bag.items.reduce((total, item) => {return total + item.quantity},0);
