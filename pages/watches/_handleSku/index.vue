@@ -17,6 +17,15 @@
           <hr class="line">
           <p class="title">{{product.name}}</p>
           <p class="price hide-sm">{{product.skus.data[currentSkuIndex].price / 100 | currency }}</p>
+
+          <div class="product-rating-cont">
+            <no-ssr>
+              <review-stars :rating="3.3">
+                <span slot="after" class="ratings-count">({{productReviews.length}})</span>
+              </review-stars>
+            </no-ssr>
+          </div>
+
           <div class="color-bubble" :style="{backgroundImage: 'url(https://d3dty8fv62xana.cloudfront.net/skucrop-' + product.skus.data[currentSkuIndex].id + '.jpg)'}" ></div>
           <p class="color-text">Color: {{product.metadata.dialColor}} / {{product.metadata.caseColor}}</p>
           <div class="add-cart-btn pdp" id="add_cart_btn_pdp" :class="{'stuck': stickyAddCart}" @click="handleAddCartClick">
@@ -74,7 +83,8 @@
           <p class="pdp-info-title">Watch Details</p>
           <product-info-table :sku="product.skus.data[currentSkuIndex]" :productInfo="product.metadata"></product-info-table>
         </div>
-        <!-- <hr class="pdp-divider"> -->
+        <hr class="pdp-divider aux">
+        <review-section :reviews="productReviews"></review-section>
       <!-- <band-section></band-section> -->
       </div>
     </div>
@@ -83,10 +93,13 @@
 
 <script>
 import BagService from '@/BagService';
+import ReviewService from '@/ReviewService';
 import StripeService from '@/StripeService';
 import ProductInfoTable from '@/components/product/ProductInfoTable';
 import BandSection from '@/components/bands/BandSection';
 import ProductImage from '@/components/product/ProductImage';
+import ReviewStars from '@/components/product/ReviewStars';
+import ReviewSection from '@/components/product/ReviewSection';
 export default {
     head() {
       return {
@@ -103,6 +116,8 @@ export default {
       ProductInfoTable,
       BandSection,
       ProductImage,
+      ReviewStars,
+      ReviewSection,
     },
     asyncData({params, error}) {
       const [handle, sku] = params.handleSku.split('-');
@@ -115,12 +130,14 @@ export default {
     },
     data () {
       return {
+        currentSkuIndex: null,
+        productReviews: [],
+        averageRating: 0.0,
+        stickyAddCart: false,
         product: null,
         handle: null,
         sku: null,
-        currentSkuIndex: null,
-        productInfo: null,
-        stickyAddCart: false,
+
         addCartOffset: null,
         activeImageIndex: 0,
         lastMobileImageHeight: 0,
@@ -130,6 +147,12 @@ export default {
     this.setSkuNav(this.sku)
     this.setLazyLoad();
     window.fbq && window.fbq('track', 'ViewContent');
+    ReviewService.getProductReviews(this.product.id).then((result) => {
+      this.productReviews = result.data
+      this.averageRating = result.data.reduce((total, review) => {
+        return total + review.star_rating / result.data.length
+      },0)
+    }, (err) => { debugger; })
   },
   beforeMount() {
     this.setButtonOffset();
@@ -140,6 +163,9 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
+    getProductReviews() {
+
+    },
     setLazyLoad() {
       this.$Lazyload.$once('loaded', (e) => {
         document.getElementById('pdp_lazy_1').setAttribute('lazy', 'loaded')
@@ -157,7 +183,6 @@ export default {
         this.$store.commit('SET_NAV_ACTIVE', 3);
         break;
       }
-
     },
     setButtonOffset() {
       setTimeout(() => {
@@ -182,6 +207,20 @@ export default {
 
 <style lang="scss">
   @import '../../../assets/css/_variables.scss';
+  .product-rating-cont {
+    margin-bottom: 2.4rem;
+    @include respond-to(sm) {
+      margin-bottom: 3.1rem;
+    }
+    .ratings-count {
+      display: inline;
+      @include intro-text;
+      font-size: 1.2rem;
+      letter-spacing: 1.5px;
+      margin-left: 0.3rem;
+      @include respond-to(sm) {margin-left: 0.6rem;}
+    }
+  }
   .how-to-wear-images-cont {
     margin: -0.3rem;
     &:after {
@@ -236,8 +275,8 @@ export default {
     overflow: hidden;
     padding: 11rem 1.3rem;
     @include respond-to(lg) {padding: 8rem 0 0 0;}
-    @include respond-to(md) {padding: 6.2rem 4.4rem;}
-    @include respond-to(sm) {padding: 4rem 0;}
+    @include respond-to(md) {padding: 6.2rem 3rem 0 3rem;}
+    @include respond-to(sm) {padding: 4rem 0 0 0;}
     .pdp-info-title {
       @include intro-text;
       font-size: 1.4rem;
@@ -296,6 +335,7 @@ export default {
     border-bottom: 1px solid #d8d8d8;
     @include respond-to(lg) {margin: 0 -2rem;}
     @include respond-to(md) {margin: 0 1.5rem;}
+    &.aux {@include respond-to(md) {border: none;}}
   }
   .add-cart-btn.pdp {
     background-color: $wh-black;
@@ -446,14 +486,14 @@ export default {
         @include respond-to(sm) {
           font-size: 2.4rem;
           letter-spacing: 6px;
-          margin-bottom: 2rem;
+          margin-bottom: 1.6rem;
         }
       }
       .price {
         @include intro-text;
         font-size: 2.4rem;
         font-weight: 300;
-        margin-bottom: 4.5rem;
+        margin-bottom: 1.7rem;
       }
       .color-bubble {
         height: 3.4rem;
