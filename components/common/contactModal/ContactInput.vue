@@ -65,10 +65,10 @@
 }
 .std-input.is-danger {
   // color: red;
-  border-color: red !important;
+  border-color: $wh-red !important;
   // background-color: red;
   &+label {
-    color: red;
+    color: $wh-red;
   }
 }
 .std-input.disabled {

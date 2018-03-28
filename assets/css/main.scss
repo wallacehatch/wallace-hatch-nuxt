@@ -129,11 +129,10 @@ p{
 // COMPONENT CSS CLASSES
 // ------------------------------------------
 
-.cta-btn-2 {
+.cta-btn-1, .cta-btn-2 {
   box-shadow: 0 17px 20px 0 rgba(0, 0, 0, 0.1), 0 4px 14px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   border: solid 2px #000000;
-  // min-width: 18rem;
   padding: 1.6rem 1rem;
   text-align: center;
   box-sizing: border-box;
@@ -143,6 +142,7 @@ p{
   text-transform: uppercase;
   display: inline-block;
   font-weight: bold;
+  outline: none;
   transition: 0.2s all linear;
   @include respond-to(lg) { font-size: 1.2rem; }
   @include respond-to(md) {padding-top: 1.4rem; padding-bottom: 1.4rem;}
@@ -152,5 +152,14 @@ p{
     background-color: #000000;
     color: #fff;
     box-shadow: 0 27px 20px 0 rgba(0, 0, 0, 0.1), 0 4px 14px 0 rgba(0, 0, 0, 0.2);
+  }
+}
+.cta-btn-1 {
+  background-color: #000;
+  border: solid 2px #000000;
+  color: #fff;
+  &:hover {
+    background-color: #fff;
+    color: #000;
   }
 }

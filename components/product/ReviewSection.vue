@@ -1,46 +1,52 @@
 <template lang="html">
-<section-cont title="Customer Reviews" subtext="Authentic Reviews from our community">
-  <div class="product-reviews-cont">
-    <div class="reviews-header-cont clearfix">
-      <div class="left-cont">
-        <review-stars class="review-header-stars" :rating="averageRating">
-          <span class="review-count" slot="before">{{reviews.length}} Review<span v-if="reviews.length !== 1">s</span></span>
-          <span class="rating-text" slot="after">/ {{averageRating}} out of 5 Stars</span>
-        </review-stars>
-        <div class="recommend-cont">
-          <no-ssr><i class="fal fa-check icon"></i></no-ssr>
-          <span class="text">86% reviewers recommend this product</span>
+<div>
+  <add-review-modal :active="addReviewModalActive" @close="addReviewModalActive = false" :product="product"></add-review-modal>
+  <section-cont title="Customer Reviews" subtext="Authentic Reviews from our community">
+    <div class="product-reviews-cont">
+      <div class="reviews-header-cont clearfix">
+        <div class="left-cont">
+          <review-stars class="review-header-stars" :rating="averageRating">
+            <span class="review-count" slot="before">{{reviews.length}} Review<span v-if="reviews.length !== 1">s</span></span>
+            <span class="rating-text" slot="after">/ {{averageRating}} out of 5 Stars</span>
+          </review-stars>
+          <div class="recommend-cont">
+            <no-ssr><i class="fal fa-check icon"></i></no-ssr>
+            <span class="text">86% reviewers recommend this product</span>
+          </div>
         </div>
+        <div @click="addReviewModalActive = true" class="cta-btn-2 hide-sm">Write a Review</div>
+        <div class="cta-btn-2">Read all Reviews</div>
+        <div @click="addReviewModalActive = true" class="cta-btn-2 ml sm-only">Write a Review</div>
       </div>
-      <div class="cta-btn-2 hide-sm">Write a Review</div>
-      <div class="cta-btn-2">Read all Reviews</div>
-      <div class="cta-btn-2 ml sm-only">Write a Review</div>
+      <div class="reviews-body-cont">
+        <review-tile v-for="(review,i) in reviews" :key="i" :review="review"></review-tile>
+      </div>
+      <div class="reviews-footer-cont">
+        <div class="cta-btn-2">Read all Reviews</div>
+        <div @click="addReviewModalActive = true" class="cta-btn-2 ml">Write a Review</div>
+      </div>
     </div>
-    <div class="reviews-body-cont">
-      <review-tile v-for="(review,i) in reviews" :key="i" :review="review"></review-tile>
-    </div>
-    <div class="reviews-footer-cont">
-      <div class="cta-btn-2">Read all Reviews</div>
-      <div class="cta-btn-2 ml">Write a Review</div>
-    </div>
-  </div>
-</section-cont>
+  </section-cont>
+</div>
 </template>
 
 <script>
 import SectionCont from './SectionCont';
 import ReviewStars from './ReviewStars';
 import ReviewTile from './ReviewTile';
+import AddReviewModal from '@/components/product/AddReviewModal';
 export default {
-  props: ['reviews'],
+  props: ['reviews', 'product'],
   components: {
     SectionCont,
     ReviewStars,
     ReviewTile,
+    AddReviewModal,
   },
   data() {
     return {
       averageRating: 0,
+      addReviewModalActive: true,
     }
   },
   methods: {

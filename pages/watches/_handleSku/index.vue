@@ -84,7 +84,7 @@
           <product-info-table :sku="product.skus.data[currentSkuIndex]" :productInfo="product.metadata"></product-info-table>
         </div>
         <hr class="pdp-divider aux">
-        <review-section :reviews="productReviews"></review-section>
+        <review-section :product="product" :reviews="productReviews"></review-section>
       <!-- <band-section></band-section> -->
       </div>
     </div>
