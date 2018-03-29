@@ -1,6 +1,6 @@
 <template lang="html">
 <div>
-  <add-review-modal :active="addReviewModalActive" @close="addReviewModalActive = false" :product="product"></add-review-modal>
+  <add-review-modal :active="addReviewModalActive" @success="handleAddReviewSuccess" @close="addReviewModalActive = false" :product="product"></add-review-modal>
   <section-cont title="Customer Reviews" subtext="Authentic Reviews from our community">
     <div class="product-reviews-cont">
       <div class="reviews-header-cont clearfix">
@@ -11,7 +11,7 @@
           </review-stars>
           <div class="recommend-cont">
             <no-ssr><i class="fal fa-check icon"></i></no-ssr>
-            <span class="text">86% reviewers recommend this product</span>
+            <span class="text">{{averageReco}}% of reviewers recommend this product</span>
           </div>
         </div>
         <div @click="addReviewModalActive = true" class="cta-btn-2 hide-sm">Write a Review</div>
@@ -46,15 +46,24 @@ export default {
   data() {
     return {
       averageRating: 0,
-      addReviewModalActive: true,
+      averageReco: 0,
+      addReviewModalActive: false,
     }
   },
   methods: {
+    handleAddReviewSuccess() {
+      this.addReviewModalActive = false;
+      this.$emit('refresh');
+    },
     populateReviewData(reviews) {
-      this.averageRating = reviews.reduce((total, review) => {
-        console.log(review.star_rating / reviews.length);
-        return total + review.star_rating / reviews.length
-      },0).precisionRound(1)
+      const data = reviews.reduce((total, review) => {
+        return {
+          rating: total.rating + review.star_rating / reviews.length,
+          reco: total.reco + Number(review.friend_recommendation) / reviews.length
+        }
+      },{rating: 0, reco: 0})
+      this.averageRating = data.rating.precisionRound(1);
+      this.averageReco = Math.round(data.reco * 100);
     }
   },
   beforeMount() {

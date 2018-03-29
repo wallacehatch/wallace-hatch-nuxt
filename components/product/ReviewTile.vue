@@ -1,19 +1,19 @@
 <template lang="html">
   <div class="review-tile-cont clearfix">
     <div class="left-cont">
-      <div class="image">G</div>
-      <p class="name hide-sm">By Greg M.</p>
-      <p class="prev-reviews hide-sm">1 Reviews</p>
+      <div class="image">{{review.customer_name ? review.customer_name.split('')[0] : '?'}}</div>
+      <p class="name hide-sm">By {{review.customer_name}}</p>
+      <p class="prev-reviews hide-sm">{{review.customer_reviews}} Review<span v-if="review.customer_reviews > 1">s</span></p>
     </div>
     <div class="right-cont">
       <review-stars :rating="review.star_rating">
-        <div class="recommend-cont" slot="after">
+        <div class="recommend-cont" slot="after" v-if="review.friend_recommendation">
           <span class="rating-text">/ {{review.star_rating}} out of 5 Stars</span>
           <no-ssr><i class="fal fa-check icon hide-sm"></i></no-ssr>
           <span class="recommend-text hide-sm">Yes I recommend<br class="md-only hide-sm"><span class="hide-md"> </span>this product.</span>
         </div>
       </review-stars>
-      <div class="mobile-recommend-cont">
+      <div class="mobile-recommend-cont" v-if="review.friend_recommendation">
         <no-ssr><i class="fal fa-check icon"></i></no-ssr>
         <span class="recommend-text">Yes I recommend this product.</span>
       </div>

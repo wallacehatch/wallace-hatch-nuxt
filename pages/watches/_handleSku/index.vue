@@ -84,7 +84,7 @@
           <product-info-table :sku="product.skus.data[currentSkuIndex]" :productInfo="product.metadata"></product-info-table>
         </div>
         <hr class="pdp-divider aux">
-        <review-section :product="product" :reviews="productReviews"></review-section>
+        <review-section @refresh="getProductReviews" :product="product" :reviews="productReviews"></review-section>
       <!-- <band-section></band-section> -->
       </div>
     </div>
@@ -147,12 +147,7 @@ export default {
     this.setSkuNav(this.sku)
     this.setLazyLoad();
     window.fbq && window.fbq('track', 'ViewContent');
-    ReviewService.getProductReviews(this.product.id).then((result) => {
-      this.productReviews = result.data
-      this.averageRating = result.data.reduce((total, review) => {
-        return total + review.star_rating / result.data.length
-      },0)
-    }, (err) => { debugger; })
+    this.getProductReviews();
   },
   beforeMount() {
     this.setButtonOffset();
@@ -164,7 +159,12 @@ export default {
   },
   methods: {
     getProductReviews() {
-
+      ReviewService.getProductReviews(this.product.id).then((result) => {
+        this.productReviews = result.data
+        this.averageRating = result.data.reduce((total, review) => {
+          return total + review.star_rating / result.data.length
+        },0)
+      }, (err) => { debugger; })
     },
     setLazyLoad() {
       this.$Lazyload.$once('loaded', (e) => {

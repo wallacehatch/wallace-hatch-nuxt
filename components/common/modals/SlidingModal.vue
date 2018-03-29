@@ -14,6 +14,7 @@
 import anime from 'animejs';
 export default {
   props: ['active', 'mKey'],
+  inject: ['$validator'],
   data() {
     return {
       lActive: false,
@@ -62,7 +63,7 @@ export default {
   },
   mounted() {
     // uncomment this to have form always out
-    this.toggleModal(true);
+    // this.toggleModal(true);
   },
   watch: {
     'active' (newState) {
@@ -97,6 +98,7 @@ export default {
     .inner-cont {
       background-color: $wh-white;
       box-shadow: -20px 0 20px 0 rgba(0, 0, 0, 0.1), -10px 0 14px 0 rgba(0, 0, 0, 0.2);
+      box-sizing: border-box;
       max-width: 60rem;
       width: 66%;
       min-height: 100vh;

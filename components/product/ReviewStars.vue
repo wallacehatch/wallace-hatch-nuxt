@@ -35,6 +35,7 @@
 <script>
 export default {
   props: ['rating', 'selectMode'],
+  inject: ['$validator'],
 }
 </script>
 

@@ -26,8 +26,8 @@ function createReview(review){
 // 	              review_message: "message about how great this f'in watch is ",
 // 								customer_email: "greg711millers@gmail.com",
 // 								friend_recommendation: true,
-// 								friend_recommendation_rating: 1,
-// 								friend_recommendation_message: "I would recommend this to my friend becasue it is awesome"
+									// brand_rating: 4,
+									// brand_rating_message: "some message",
 //             }
  return Promise.resolve(axios.post(process.env.API_URL + 'create-review/', review))
 }

@@ -71,14 +71,15 @@ export default {
           customerName: name,
           orderId: orderId,
         }
-        hj && hj('stateChange', '/ordersuccess');
+        debugger;
+        (typeof hj !== 'undefined') && hj('stateChange', '/ordersuccess');
         window.fbq && window.fbq('track', 'Purchase');
         // TODO Rewrite this using standard ga api
         // this.$ga.event('event', 'conversion', {
         //     'send_to': 'AW-812669170/xHNFCMDg4H4Q8rHBgwM',
         //     'transaction_id': orderId,
         // });
-        ga && ga.page('/ordersuccess');
+        (typeof ga !== 'undefined') && ga.page('/ordersuccess');
         this.$router.push('/');
         this.$store.commit('SET_ORDER_SUCCESS_MODAL_ACTIVE', this.successModalData)
       }, (err) => {
