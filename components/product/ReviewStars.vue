@@ -1,31 +1,31 @@
 <template lang="html">
 <no-ssr>
-  <div class="review-stars-cont">
+  <div class="review-stars-cont" @mouseleave="(e) => {setHoveroutRating(rating)}">
     <slot name="before"></slot>
-    <div class="star-cont" @click="$emit('rate', 1)" :class="{select: selectMode}">
+    <div class="star-cont" @mouseenter="(e) => {setHoverRating(1, true)}" @click="() => {setRealRating(1)}" :class="{select: selectMode}">
       <i class="fas fa-star star star-bg"></i>
-      <span class="star-mask" :class="{visible: (rating > 0.5)}"><i class="fas fa-star star star-fg"></i></span>
-      <span class="star-mask" :class="{visible: (rating > 0.0) && (rating <= 0.5)}"><i class="fas fa-star-half star star-fg"></i></span>
+      <span class="star-mask" :class="{hovering: isHovering && wasRated < 1, visible: (lRating > 0.5)}"><i class="fas fa-star star star-fg"></i></span>
+      <span class="star-mask" :class="{visible: (lRating > 0.0) && (lRating <= 0.5)}"><i class="fas fa-star-half star star-fg"></i></span>
     </div>
-    <div class="star-cont" @click="$emit('rate', 2)" :class="{select: selectMode}">
+    <div class="star-cont" @mouseover="(e) => {setHoverRating(2, true)}" @click="() => {setRealRating(2)}" :class="{select: selectMode}">
       <i class="fas fa-star star star-bg"></i>
-      <span class="star-mask" :class="{visible: (rating > 1.5)}"><i class="fas fa-star star star-fg"></i></span>
-      <span class="star-mask" :class="{visible: (rating > 1.0) && (rating <= 1.5)}"><i class="fas fa-star-half star star-fg"></i></span>
+      <span class="star-mask" :class="{hovering: isHovering && wasRated < 2, visible: (lRating > 1.5)}"><i class="fas fa-star star star-fg"></i></span>
+      <span class="star-mask" :class="{visible: (lRating > 1.0) && (lRating <= 1.5)}"><i class="fas fa-star-half star star-fg"></i></span>
     </div>
-    <div class="star-cont" @click="$emit('rate', 3)" :class="{select: selectMode}">
+    <div class="star-cont" @mouseover="(e) => {setHoverRating(3, true)}" @click="() => {setRealRating(3)}" :class="{select: selectMode}">
       <i class="fas fa-star star star-bg"></i>
-      <span class="star-mask" :class="{visible: (rating > 2.5)}"><i class="fas fa-star star star-fg"></i></span>
-      <span class="star-mask" :class="{visible: (rating > 2.0) && (rating <= 2.5)}"><i class="fas fa-star-half star star-fg"></i></span>
+      <span class="star-mask" :class="{hovering: isHovering && wasRated < 3, visible: (lRating > 2.5)}"><i class="fas fa-star star star-fg"></i></span>
+      <span class="star-mask" :class="{visible: (lRating > 2.0) && (lRating <= 2.5)}"><i class="fas fa-star-half star star-fg"></i></span>
     </div>
-    <div class="star-cont" @click="$emit('rate', 4)" :class="{select: selectMode}">
+    <div class="star-cont" @mouseover="(e) => {setHoverRating(4, true)}" @click="() => {setRealRating(4)}" :class="{select: selectMode}">
       <i class="fas fa-star star star-bg"></i>
-      <span class="star-mask" :class="{visible: (rating > 3.5)}"><i class="fas fa-star star star-fg"></i></span>
-      <span class="star-mask" :class="{visible: (rating > 3.0) && (rating <= 3.5)}"><i class="fas fa-star-half star star-fg"></i></span>
+      <span class="star-mask" :class="{hovering: isHovering && wasRated < 4, visible: (lRating > 3.5)}"><i class="fas fa-star star star-fg"></i></span>
+      <span class="star-mask" :class="{visible: (lRating > 3.0) && (lRating <= 3.5)}"><i class="fas fa-star-half star star-fg"></i></span>
     </div>
-    <div class="star-cont" @click="$emit('rate', 5)" :class="{select: selectMode}">
+    <div class="star-cont" @mouseover="(e) => {setHoverRating(5, true)}" @click="() => {setRealRating(5)}" :class="{select: selectMode}">
       <i class="fas fa-star star star-bg"></i>
-      <span class="star-mask" :class="{visible: (rating > 4.5)}"><i class="fas fa-star star star-fg"></i></span>
-      <span class="star-mask" :class="{visible: (rating > 4.0) && (rating <= 4.5)}"><i class="fas fa-star-half star star-fg"></i></span>
+      <span class="star-mask" :class="{hovering: isHovering && wasRated < 5, visible: (lRating > 4.5)}"><i class="fas fa-star star star-fg"></i></span>
+      <span class="star-mask" :class="{visible: (lRating > 4.0) && (lRating <= 4.5)}"><i class="fas fa-star-half star star-fg"></i></span>
     </div>
     <slot name="after"></slot>
   </div>
@@ -36,6 +36,37 @@
 export default {
   props: ['rating', 'selectMode'],
   inject: ['$validator'],
+  data() {
+    return {
+      lRating: 0,
+      isHovering: false,
+      wasRated: 0,
+    }
+  },
+  mounted() {
+    this.lRating = this.rating;
+  },
+  watch: {
+    'rating' (newRating) {
+      this.lRating = newRating;
+    }
+  },
+  methods: {
+    setHoveroutRating(rating) {
+      this.wasRated = 0;
+      this.setHoverRating(rating, false);
+    },
+    setRealRating(rating) {
+      this.wasRated = rating
+      this.isHovering = false;
+      this.$emit('rate', rating)
+    },
+    setHoverRating(rating, hovering) {
+      if (!this.selectMode) return;
+      this.lRating = rating;
+      this.isHovering = hovering;
+    }
+  }
 }
 </script>
 
@@ -53,6 +84,7 @@ export default {
     .star-mask {
       opacity: 0;
       &.visible {opacity: 1.0 !important;}
+      &.hovering .star-fg {color: #d8d8d8 !important;}
     }
   }
   .star {
@@ -65,6 +97,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
+
   }
   .star-cont.select {
     .star {

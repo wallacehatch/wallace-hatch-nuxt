@@ -20,7 +20,7 @@
 
           <div class="product-rating-cont">
             <no-ssr>
-              <review-stars :rating="3.3">
+              <review-stars :rating="averageRating">
                 <span slot="after" class="ratings-count">({{productReviews.length}})</span>
               </review-stars>
             </no-ssr>

@@ -25,7 +25,7 @@
             :class="{disabled: submitSuccess}"
         		v-model="form.email"
         		:iValue="form.email"
-            iValidate="required"
+            iValidate="required|email"
         		iPlaceholder="Email"
             iType="email"
         		iClass="max">

@@ -8,7 +8,8 @@
         <p class="product-info">
           <span class="title">{{item.product.name}}</span> <span class="price">{{item.product.skus.data[item.skuInd].price / 100 | currency }}</span>
         </p>
-        <div class="add-cart-btn" @click.stop="handleAddCartClick">Add to bag</div>
+        <div class="add-cart-btn hide-sm" @click.stop="handleAddCartClick">Add to bag</div>
+        <div class="add-cart-btn mobile" @click.stop="handleTileClick">Shop now</div>
       </div>
     </div>
   </div>
@@ -123,6 +124,7 @@ export default {
       white-space: nowrap;
       padding: 2.2rem 0;
       transition: 0.3s all cubic-bezier(.28,.56,.32,1);
+      &.mobile {display: none;}
       @include respond-to(lg) {
         margin-top: 2rem;
         padding: 1.5rem 0;
@@ -130,6 +132,7 @@ export default {
       }
       @include respond-to(sm) {
         padding: 1.5rem 5.3rem;
+        &.mobile {display: block;}
       }
       @include respond-to(md) {width: 18rem;}
       &:hover {
