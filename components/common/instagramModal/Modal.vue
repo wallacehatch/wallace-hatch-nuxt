@@ -273,13 +273,14 @@ export default {
       border-bottom: 1px solid #d8d8d8;
   }
   .top-text{
-
       margin-top: 0.4rem;
       margin-left: 2rem;
       overflow: auto;
       float: left;
       display: inline-block;
       text-align: left;
+      max-width:20rem;
+      word-wrap:break-word;
   }
   .oval {
   overflow: auto;
