@@ -159,55 +159,7 @@ export default {
     width: 54%;
     height: 60rem;
   }
-  .insta-content-top-cont-mobile{
 
-    @include respond-to(sm) {
-    display: block !important;
-    overflow: auto;
-    padding-left: 1rem;
-    padding-top: 1.5rem;
-    .line{
-      overflow: auto;
-      height: 1px;
-      padding-top: 2rem;
-      width: 100%;
-      border-bottom: 1px solid #d8d8d8;
-  }
-  .top-text{
-
-      margin-top: 0.4rem;
-      margin-left: 2rem;
-      overflow: auto;
-      float: left;
-      display: inline-block;
-      text-align: left;
-  }
-  .oval {
-  overflow: auto;
-  display: inline-block;
-  float: left;
-  width: 50px;
-  height: 50px;
-  background-color: #ffffff;
-  border: solid 1px #dbdbdb;
-  border-radius: 50%;
-}
-  .logo {
-
-    background-image: url('https://d3dty8fv62xana.cloudfront.net/wh-mark.svg');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 24px;
-    height: 21px;
-    object-fit: contain;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: auto;
-  }
-}
-}
 
   .insta-content-cont {
 
@@ -226,7 +178,9 @@ export default {
     .insta-content-top-cont{
       overflow: auto;
       padding-top: 1.5rem;
+      vertical-align:top;
       .line{
+
         overflow: auto;
         height: 1px;
         padding-top: 2rem;
@@ -236,10 +190,12 @@ export default {
     .top-text{
         margin-top: 0.4rem;
         margin-left: 2rem;
-        overflow: auto;
         float: left;
         display: inline-block;
         text-align: left;
+        overflow: auto;
+        max-width:20rem;
+        word-wrap:break-word;
     }
     .oval {
     overflow: auto;
@@ -301,6 +257,56 @@ export default {
     }
     text-align: left;
   }
+
+  .insta-content-top-cont-mobile{
+
+    @include respond-to(sm) {
+    display: block !important;
+    overflow: auto;
+    padding-left: 1rem;
+    padding-top: 1.5rem;
+    .line{
+      overflow: auto;
+      height: 1px;
+      padding-top: 2rem;
+      width: 100%;
+      border-bottom: 1px solid #d8d8d8;
+  }
+  .top-text{
+
+      margin-top: 0.4rem;
+      margin-left: 2rem;
+      overflow: auto;
+      float: left;
+      display: inline-block;
+      text-align: left;
+  }
+  .oval {
+  overflow: auto;
+  display: inline-block;
+  float: left;
+  width: 50px;
+  height: 50px;
+  background-color: #ffffff;
+  border: solid 1px #dbdbdb;
+  border-radius: 50%;
+}
+  .logo {
+
+    background-image: url('https://d3dty8fv62xana.cloudfront.net/wh-mark.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 21px;
+    object-fit: contain;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto;
+  }
+}
+}
 
 
   .close-btn {
