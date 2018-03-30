@@ -15,14 +15,16 @@
           </div>
         </div>
         <div @click="addReviewModalActive = true" class="cta-btn-2 hide-sm">Write a Review</div>
-        <div class="cta-btn-2">Read all Reviews</div>
+        <!-- TODO Add this back in once we need to paginate reviews-->
+        <!-- <div class="cta-btn-2">Read all Reviews</div> -->
         <div @click="addReviewModalActive = true" class="cta-btn-2 ml sm-only">Write a Review</div>
       </div>
       <div class="reviews-body-cont">
         <review-tile v-for="(review,i) in reviews" :key="i" :review="review"></review-tile>
       </div>
       <div class="reviews-footer-cont">
-        <div class="cta-btn-2">Read all Reviews</div>
+        <!-- TODO Add this back in once we need to paginate reviews-->
+        <!-- <div class="cta-btn-2">Read all Reviews</div> -->
         <div @click="addReviewModalActive = true" class="cta-btn-2 ml">Write a Review</div>
       </div>
     </div>

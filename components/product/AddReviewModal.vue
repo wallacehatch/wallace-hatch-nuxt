@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <form @submit.prevent>
+    <form @submit.prevent class="add-review-form">
       <p class="section-heading">Overall Rating</p>
       <review-stars id="review_stars" class="add-review-stars" @rate="setRating" :rating="review.star_rating" selectMode="true">
         <span slot="after" class="review-label rate-click hide-sm">Click or Tap to rate!</span>

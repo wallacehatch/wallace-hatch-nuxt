@@ -15,7 +15,11 @@ export default ({ app }) => {
   /*
   ** Set the current page
   */
-  ga('create', 'UA-115122323-2', 'auto')
+  // PRODUCTION ID
+  // ga('create', 'UA-115122323-2', 'auto')
+
+  // STAGING ID
+  ga('create', 'UA-115122323-1', 'auto')
   /*
   ** Every time the route changes (fired on initialization too)
   */
