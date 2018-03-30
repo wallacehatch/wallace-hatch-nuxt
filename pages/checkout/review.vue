@@ -79,7 +79,10 @@ export default {
         //     'send_to': 'AW-812669170/xHNFCMDg4H4Q8rHBgwM',
         //     'transaction_id': orderId,
         // });
-        (typeof ga !== 'undefined') && ga.page('/ordersuccess');
+        if (typeof ga !== 'undefined') {
+          ga('set', 'page', '/ordersuccess')
+          ga('send', 'pageview')
+        }
         this.$router.push('/');
         this.$store.commit('SET_ORDER_SUCCESS_MODAL_ACTIVE', this.successModalData)
       }, (err) => {
