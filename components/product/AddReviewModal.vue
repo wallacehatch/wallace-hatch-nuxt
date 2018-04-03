@@ -47,10 +47,10 @@
         @focus="reviewTextarea.active = true"
         @blur="(e) => {shouldBlurField(e, reviewTextarea)}"
         @keyup="(e) => {setCharCount(e, reviewTextarea)}"
-        :placeholder="errors.has('reviewBody') ? errors.first('reviewBody') : 'Review'"
-        name="reviewBody" id="" cols="30" rows="4"
+        :placeholder="errors.has('review body') ? errors.first('review body') : 'Review'"
+        name="review body" id="" cols="30" rows="4"
         class="contact-text-area"
-        :class="{disabled: submitSuccess, 'is-danger': errors.has('reviewBody'), active: reviewTextarea.active}">
+        :class="{disabled: submitSuccess, 'is-danger': errors.has('review body'), active: reviewTextarea.active}">
         </textarea>
       </div>
       <br>

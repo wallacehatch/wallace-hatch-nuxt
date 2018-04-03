@@ -16,7 +16,6 @@
           <p class="size">{{product.skus.data[currentSkuIndex].attributes.size}}MM</p>
           <hr class="line">
           <p class="title">{{product.name}}</p>
-          <p class="price hide-sm">{{product.skus.data[currentSkuIndex].price / 100 | currency }}</p>
 
           <div class="product-rating-cont" @click="scrollToReviews">
             <no-ssr>
@@ -26,6 +25,7 @@
             </no-ssr>
           </div>
 
+          <p class="price hide-sm">{{product.skus.data[currentSkuIndex].price / 100 | currency }}</p>
           <div class="color-bubble" :style="{backgroundImage: 'url(https://d3dty8fv62xana.cloudfront.net/skucrop-' + product.skus.data[currentSkuIndex].id + '.jpg)'}" ></div>
           <p class="color-text">Color: {{product.metadata.dialColor}} / {{product.metadata.caseColor}}</p>
           <div class="add-cart-btn pdp" id="add_cart_btn_pdp" :class="{'stuck': stickyAddCart}" @click="handleAddCartClick">
@@ -222,10 +222,10 @@ export default {
 <style lang="scss">
   @import '../../../assets/css/_variables.scss';
   .product-rating-cont {
-    margin-bottom: 2.4rem;
+    margin-bottom: 2rem;
     &:hover {cursor: pointer;}
     @include respond-to(sm) {
-      margin-bottom: 3.1rem;
+      margin-bottom: 3rem;
     }
     .ratings-count {
       display: inline;
@@ -498,7 +498,7 @@ export default {
         font-size: 3.2rem;
         letter-spacing: 8px;
         text-transform: uppercase;
-        margin-bottom: 3rem;
+        margin-bottom: 1.5rem;
         @include respond-to(sm) {
           font-size: 2.4rem;
           letter-spacing: 6px;
