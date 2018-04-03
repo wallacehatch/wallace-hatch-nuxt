@@ -18,7 +18,7 @@
           <p class="title">{{product.name}}</p>
           <p class="price hide-sm">{{product.skus.data[currentSkuIndex].price / 100 | currency }}</p>
 
-          <div class="product-rating-cont">
+          <div class="product-rating-cont" @click="scrollToReviews">
             <no-ssr>
               <review-stars :rating="averageRating">
                 <span slot="after" class="ratings-count">({{productReviews.length}})</span>
@@ -84,7 +84,7 @@
           <product-info-table :sku="product.skus.data[currentSkuIndex]" :productInfo="product.metadata"></product-info-table>
         </div>
         <hr class="pdp-divider aux">
-        <review-section @refresh="getProductReviews" :product="product" :reviews="productReviews"></review-section>
+        <review-section @refresh="getProductReviews" :product="product" id="review-section" :reviews="productReviews"></review-section>
       <!-- <band-section></band-section> -->
       </div>
     </div>
@@ -158,6 +158,14 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
+    scrollToReviews() {
+      console.log('should be scrolling');
+      window.scrollTo({
+        top: document.getElementById('review-section').getBoundingClientRect().top,
+        left: 0,
+        behavior: 'smooth',
+      })
+    },
     getProductReviews() {
       ReviewService.getProductReviews(this.product.id).then((result) => {
         this.productReviews = result.data
@@ -215,6 +223,7 @@ export default {
   @import '../../../assets/css/_variables.scss';
   .product-rating-cont {
     margin-bottom: 2.4rem;
+    &:hover {cursor: pointer;}
     @include respond-to(sm) {
       margin-bottom: 3.1rem;
     }

@@ -84,7 +84,7 @@ export default {
     .star-mask {
       opacity: 0;
       &.visible {opacity: 1.0 !important;}
-      &.hovering .star-fg {color: #d8d8d8 !important;}
+      &.hovering .star-fg {color: #000 !important;}
     }
   }
   .star {
