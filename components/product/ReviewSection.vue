@@ -87,6 +87,18 @@ export default {
     margin: 3rem 0;
     justify-content: center;
     @include respond-to(sm) {margin: 2rem 0}
+    .cta-btn-2 {
+      width: 24rem;
+      float: right;
+      margin-left: 2rem;
+      margin-bottom: 0.2rem;
+      @include respond-to(lg) {width: 22rem;}
+      @include respond-to(md) {width: 18rem;}
+      @include respond-to(sm) {
+        width: 14.5rem;
+        margin-left: 0.4rem;
+      }
+    }
     .ml {
       margin-left: 2rem;
       @include respond-to(sm) {margin-left: 1rem;}

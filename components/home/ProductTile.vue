@@ -163,6 +163,7 @@ export default {
           padding-top: 1rem;
         }
         .price {
+          margin-left: 1rem;
           letter-spacing: 2px;
           font-weight: 300;
           @include respond-to(lg) { letter-spacing: 3px; }
