@@ -8,9 +8,9 @@
     <div class="right-cont">
       <review-stars :rating="review.star_rating">
         <div class="recommend-cont" slot="after" v-if="review.friend_recommendation">
-          <span class="rating-text">/ {{review.star_rating}} out of 5 Stars</span>
+          <span class="rating-text">/ {{new Date(review.created_at).timePassed()}}</span>
           <no-ssr><i class="fal fa-check icon hide-sm"></i></no-ssr>
-          <span class="recommend-text hide-sm">Yes I recommend<br class="md-only hide-sm"><span class="hide-md"> </span>this product.</span>
+          <span class="recommend-text hide-sm">Yes I recommend <span class="md-only hide-sm"><br>t</span><span class="hide-md"> t</span>his product.</span>
         </div>
       </review-stars>
       <div class="mobile-recommend-cont" v-if="review.friend_recommendation">

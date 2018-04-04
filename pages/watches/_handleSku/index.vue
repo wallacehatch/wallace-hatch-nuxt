@@ -168,7 +168,7 @@ export default {
     },
     getProductReviews() {
       ReviewService.getProductReviews(this.product.id).then((result) => {
-        this.productReviews = result.data
+        this.productReviews = result.data.reverse();
         this.averageRating = result.data.reduce((total, review) => {
           return total + review.star_rating / result.data.length
         },0)
