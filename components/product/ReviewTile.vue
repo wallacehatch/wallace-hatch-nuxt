@@ -17,7 +17,7 @@
         <no-ssr><i class="fal fa-check icon"></i></no-ssr>
         <span class="recommend-text">Yes I recommend this product.</span>
       </div>
-      <p class="review-text mobile">By Grem M. 1 Review</p>
+      <p class="review-text mobile">By {{review.customer_name | firstLastInitial}} {{review.customer_reviews}} Review<span v-if="review.customer_reviews > 1">s</span></p>
       <p class="review-text review-title">{{review.review_title}}</p>
       <p class="review-text">{{review.review_message}}</p>
     </div>
