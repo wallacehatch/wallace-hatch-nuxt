@@ -140,8 +140,9 @@
   display: inline-block;
   max-width: 100% !important;
   background-color: #ffffff;
-  box-shadow: 0 17px 20px 0 rgba(0, 0, 0, 0.1), 0 4px 14px 0 rgba(0, 0, 0, 0.2);
-  border: solid 2px #d1d1d1;
+  // box-shadow: 0 17px 20px 0 rgba(0, 0, 0, 0.1), 0 4px 14px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.05), 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px #d1d1d1;
   box-sizing: border-box;
   @include text-body;
   letter-spacing: 0.5px;
@@ -163,6 +164,7 @@
   &:focus, &.submitted, &.active {
     box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.1), 0 4px 4px 0 rgba(0, 0, 0, 0.2);
     border: solid 2px #000000;
+    padding: 1.5rem 0;
     &+label {
       font-size: 10px;
       top: 7px;

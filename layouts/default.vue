@@ -46,6 +46,30 @@ export default {
       var factor = Math.pow(10, precision);
       return Math.round(this * factor) / factor;
     }
+    Date.prototype.timePassed = function() {
+      const diff = new Date().getTime() - new Date(this).getTime();
+      if (diff <= 60 * 1000) {
+        return '1 min ago'
+      }
+      else if (diff < 60 * 1000 * 60) {
+        return String(Math.round(diff / (60*1000))) + ' mins ago'
+      }
+      else if (diff <= 60 * 1000 * 60  * 1.5) {
+        return String(Math.round(diff / (60*60*1000))) + ' hour ago'
+      }
+      else if (diff < 60 * 1000 * 60  * 24) {
+        return String(Math.round(diff / (60*60*1000))) + ' hours ago'
+      }
+      else if (diff < 60 * 1000 * 60  * 24 * 7) {
+        return String(Math.round(diff / (60*60*1000*24))) + ' days ago'
+      }
+      else if (diff < 60 * 1000 * 60  * 24 * 30){
+        return String(Math.round(diff / (60*60*1000*24*7))) + ' weeks ago'
+      }
+      else {
+        return String(Math.round(diff / (60*60*1000*24*30))) + ' months ago'
+      }
+    }
 
     const bag = BagService.getBag();
     if (bag === null) return;

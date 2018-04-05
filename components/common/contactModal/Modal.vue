@@ -25,7 +25,7 @@
             :class="{disabled: submitSuccess}"
         		v-model="form.email"
         		:iValue="form.email"
-            iValidate="required"
+            iValidate="required|email"
         		iPlaceholder="Email"
             iType="email"
         		iClass="max">
@@ -333,8 +333,9 @@ export default {
 
   .contact-text-area {
     background-color: #ffffff;
-  	box-shadow: 0 17px 20px 0 rgba(0, 0, 0, 0.1), 0 4px 14px 0 rgba(0, 0, 0, 0.2);
-  	border: solid 2px #d1d1d1;
+  	// box-shadow: 0 17px 20px 0 rgba(0, 0, 0, 0.1), 0 4px 14px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.05), 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  	border: solid 1px #d1d1d1;
     overflow: visible;
     @include text-body;
     padding: 2rem 2rem;
@@ -349,14 +350,16 @@ export default {
     &::-ms-input-placeholder {color: #000}
     &:focus, &.active {
       border-color: #000;
+      border-width: 2px;
+      padding: 1.9rem 2rem;
       box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.1), 0 4px 4px 0 rgba(0, 0, 0, 0.2);
     }
     &.is-danger {
-      border-color: red !important;
-      &::-webkit-input-placeholder {color: red}
-      &:-moz-input-placeholder {color: red}
-      &::-moz-input-placeholder {color: red}
-      &::-ms-input-placeholder {color: red}
+      border-color: $wh-red !important;
+      &::-webkit-input-placeholder {color: $wh-red}
+      &:-moz-input-placeholder {color: $wh-red}
+      &::-moz-input-placeholder {color: $wh-red}
+      &::-ms-input-placeholder {color: $wh-red}
     }
     &.disabled {
       color: #d1d1d1;

@@ -1,23 +1,23 @@
 <template lang="html">
   <div class="review-tile-cont clearfix">
     <div class="left-cont">
-      <div class="image">G</div>
-      <p class="name hide-sm">By Greg M.</p>
-      <p class="prev-reviews hide-sm">1 Reviews</p>
+      <div class="image">{{review.customer_name ? review.customer_name.split('')[0] : '?'}}</div>
+      <p class="name hide-sm">By {{review.customer_name | firstLastInitial}}</p>
+      <p class="prev-reviews hide-sm">{{review.customer_reviews}} Review<span v-if="review.customer_reviews > 1">s</span></p>
     </div>
     <div class="right-cont">
       <review-stars :rating="review.star_rating">
-        <div class="recommend-cont" slot="after">
-          <span class="rating-text">/ {{review.star_rating}} out of 5 Stars</span>
+        <div class="recommend-cont" slot="after" v-if="review.friend_recommendation">
+          <span class="rating-text">/ {{new Date(review.created_at).timePassed()}}</span>
           <no-ssr><i class="fal fa-check icon hide-sm"></i></no-ssr>
-          <span class="recommend-text hide-sm">Yes I recommend<br class="md-only hide-sm"><span class="hide-md"> </span>this product.</span>
+          <span class="recommend-text hide-sm">Yes I recommend <span class="md-only hide-sm"><br>t</span><span class="hide-md"> t</span>his product.</span>
         </div>
       </review-stars>
-      <div class="mobile-recommend-cont">
+      <div class="mobile-recommend-cont" v-if="review.friend_recommendation">
         <no-ssr><i class="fal fa-check icon"></i></no-ssr>
         <span class="recommend-text">Yes I recommend this product.</span>
       </div>
-      <p class="review-text mobile">By Grem M. 1 Review</p>
+      <p class="review-text mobile">By {{review.customer_name | firstLastInitial}} {{review.customer_reviews}} Review<span v-if="review.customer_reviews > 1">s</span></p>
       <p class="review-text review-title">{{review.review_title}}</p>
       <p class="review-text">{{review.review_message}}</p>
     </div>
@@ -31,15 +31,12 @@ export default {
   components: {
     ReviewStars,
   },
-  data() {
-    return {
-      // review: {
-      //   prodct_id: "prod_CCDBCRzlKEEp7V",
-      //   star_rating: 3.5,
-      //   review_title: "This is the greates watch I have ever seen in my entire life",
-      //   review_message: "pibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.",
-      //   customer_id: "cus_CLeyoSgOmQdiDf",
-      // }
+  filters: {
+    firstLastInitial(value) {
+      if (value.split(' ').length === 1) return value;
+      const first = value.split(' ')[0]
+      const last = value.split(' ')[value.split(' ').length-1].split('')[0]
+      return first + ' ' + last + '.'
     }
   }
 }

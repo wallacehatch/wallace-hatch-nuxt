@@ -1,54 +1,71 @@
 <template lang="html">
-<section-cont title="Customer Reviews" subtext="Authentic Reviews from our community">
-  <div class="product-reviews-cont">
-    <div class="reviews-header-cont clearfix">
-      <div class="left-cont">
-        <review-stars class="review-header-stars" :rating="averageRating">
-          <span class="review-count" slot="before">{{reviews.length}} Review<span v-if="reviews.length !== 1">s</span></span>
-          <span class="rating-text" slot="after">/ {{averageRating}} out of 5 Stars</span>
-        </review-stars>
-        <div class="recommend-cont">
-          <no-ssr><i class="fal fa-check icon"></i></no-ssr>
-          <span class="text">86% reviewers recommend this product</span>
+<div>
+  <add-review-modal :active="addReviewModalActive" @success="handleAddReviewSuccess" @close="addReviewModalActive = false" :product="product"></add-review-modal>
+  <section-cont title="Customer Reviews" subtext="Authentic Reviews from our community">
+    <div class="product-reviews-cont">
+      <div class="reviews-header-cont clearfix">
+        <div class="left-cont">
+          <review-stars class="review-header-stars" :rating="averageRating">
+            <span class="review-count" slot="before">{{reviews.length}} Review<span v-if="reviews.length !== 1">s</span></span>
+            <span class="rating-text" slot="after">/ {{averageRating}} out of 5 Stars</span>
+          </review-stars>
+          <div class="recommend-cont">
+            <no-ssr><i class="fal fa-check icon"></i></no-ssr>
+            <span class="text">{{averageReco}}% of reviewers recommend this product</span>
+          </div>
         </div>
+        <div @click="addReviewModalActive = true" class="cta-btn-2 hide-sm">Write a Review</div>
+        <!-- TODO Add this back in once we need to paginate reviews-->
+        <!-- <div class="cta-btn-2">Read all Reviews</div> -->
+        <div @click="addReviewModalActive = true" class="cta-btn-2 ml sm-only">Write a Review</div>
       </div>
-      <div class="cta-btn-2 hide-sm">Write a Review</div>
-      <div class="cta-btn-2">Read all Reviews</div>
-      <div class="cta-btn-2 ml sm-only">Write a Review</div>
+      <div class="reviews-body-cont">
+        <review-tile v-for="(review,i) in reviews" :key="i" :review="review"></review-tile>
+      </div>
+      <div class="reviews-footer-cont">
+        <!-- TODO Add this back in once we need to paginate reviews-->
+        <!-- <div class="cta-btn-2">Read all Reviews</div> -->
+        <div @click="addReviewModalActive = true" class="cta-btn-2 ml">Write a Review</div>
+      </div>
     </div>
-    <div class="reviews-body-cont">
-      <review-tile v-for="(review,i) in reviews" :key="i" :review="review"></review-tile>
-    </div>
-    <div class="reviews-footer-cont">
-      <div class="cta-btn-2">Read all Reviews</div>
-      <div class="cta-btn-2 ml">Write a Review</div>
-    </div>
-  </div>
-</section-cont>
+  </section-cont>
+</div>
 </template>
 
 <script>
 import SectionCont from './SectionCont';
 import ReviewStars from './ReviewStars';
 import ReviewTile from './ReviewTile';
+import AddReviewModal from '@/components/product/AddReviewModal';
 export default {
-  props: ['reviews'],
+  props: ['reviews', 'product'],
   components: {
     SectionCont,
     ReviewStars,
     ReviewTile,
+    AddReviewModal,
   },
   data() {
     return {
       averageRating: 0,
+      averageReco: 0,
+      addReviewModalActive: false,
     }
   },
   methods: {
+    handleAddReviewSuccess() {
+      this.addReviewModalActive = false;
+      this.$emit('refresh');
+    },
     populateReviewData(reviews) {
-      this.averageRating = reviews.reduce((total, review) => {
-        console.log(review.star_rating / reviews.length);
-        return total + review.star_rating / reviews.length
-      },0).precisionRound(1)
+      const data = reviews.reduce((total, review) => {
+        return {
+          rating: total.rating + review.star_rating / reviews.length,
+          reco: total.reco + Number(review.friend_recommendation) / reviews.length
+        }
+      },{rating: 0, reco: 0})
+      this.averageRating = data.rating.precisionRound(1);
+      this.averageReco = Math.round(data.reco * 100);
     }
   },
   beforeMount() {
@@ -70,6 +87,18 @@ export default {
     margin: 3rem 0;
     justify-content: center;
     @include respond-to(sm) {margin: 2rem 0}
+    .cta-btn-2 {
+      width: 24rem;
+      float: right;
+      margin-left: 2rem;
+      margin-bottom: 0.2rem;
+      @include respond-to(lg) {width: 22rem;}
+      @include respond-to(md) {width: 18rem;}
+      @include respond-to(sm) {
+        width: 14.5rem;
+        margin-left: 0.4rem;
+      }
+    }
     .ml {
       margin-left: 2rem;
       @include respond-to(sm) {margin-left: 1rem;}

@@ -16,16 +16,16 @@
           <p class="size">{{product.skus.data[currentSkuIndex].attributes.size}}MM</p>
           <hr class="line">
           <p class="title">{{product.name}}</p>
-          <p class="price hide-sm">{{product.skus.data[currentSkuIndex].price / 100 | currency }}</p>
 
-          <div class="product-rating-cont">
+          <div class="product-rating-cont" @click="scrollToReviews">
             <no-ssr>
-              <review-stars :rating="3.3">
+              <review-stars :rating="averageRating">
                 <span slot="after" class="ratings-count">({{productReviews.length}})</span>
               </review-stars>
             </no-ssr>
           </div>
 
+          <p class="price hide-sm">{{product.skus.data[currentSkuIndex].price / 100 | currency }}</p>
           <div class="color-bubble" :style="{backgroundImage: 'url(https://d3dty8fv62xana.cloudfront.net/skucrop-' + product.skus.data[currentSkuIndex].id + '.jpg)'}" ></div>
           <p class="color-text">Color: {{product.metadata.dialColor}} / {{product.metadata.caseColor}}</p>
           <div class="add-cart-btn pdp" id="add_cart_btn_pdp" :class="{'stuck': stickyAddCart}" @click="handleAddCartClick">
@@ -84,7 +84,7 @@
           <product-info-table :sku="product.skus.data[currentSkuIndex]" :productInfo="product.metadata"></product-info-table>
         </div>
         <hr class="pdp-divider aux">
-        <review-section :reviews="productReviews"></review-section>
+        <review-section @refresh="getProductReviews" :product="product" id="review-section" :reviews="productReviews"></review-section>
       <!-- <band-section></band-section> -->
       </div>
     </div>
@@ -147,12 +147,7 @@ export default {
     this.setSkuNav(this.sku)
     this.setLazyLoad();
     window.fbq && window.fbq('track', 'ViewContent');
-    ReviewService.getProductReviews(this.product.id).then((result) => {
-      this.productReviews = result.data
-      this.averageRating = result.data.reduce((total, review) => {
-        return total + review.star_rating / result.data.length
-      },0)
-    }, (err) => { debugger; })
+    this.getProductReviews();
   },
   beforeMount() {
     this.setButtonOffset();
@@ -163,8 +158,21 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
+    scrollToReviews() {
+      console.log('should be scrolling');
+      window.scrollTo({
+        top: document.getElementById('review-section').getBoundingClientRect().top,
+        left: 0,
+        behavior: 'smooth',
+      })
+    },
     getProductReviews() {
-
+      ReviewService.getProductReviews(this.product.id).then((result) => {
+        this.productReviews = result.data.reverse();
+        this.averageRating = result.data.reduce((total, review) => {
+          return total + review.star_rating / result.data.length
+        },0)
+      }, (err) => { debugger; })
     },
     setLazyLoad() {
       this.$Lazyload.$once('loaded', (e) => {
@@ -214,9 +222,10 @@ export default {
 <style lang="scss">
   @import '../../../assets/css/_variables.scss';
   .product-rating-cont {
-    margin-bottom: 2.4rem;
+    margin-bottom: 2rem;
+    &:hover {cursor: pointer;}
     @include respond-to(sm) {
-      margin-bottom: 3.1rem;
+      margin-bottom: 3rem;
     }
     .ratings-count {
       display: inline;
@@ -489,7 +498,7 @@ export default {
         font-size: 3.2rem;
         letter-spacing: 8px;
         text-transform: uppercase;
-        margin-bottom: 3rem;
+        margin-bottom: 1.5rem;
         @include respond-to(sm) {
           font-size: 2.4rem;
           letter-spacing: 6px;
