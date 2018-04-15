@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="instagram-feed-cont">
       <a class="instagram-image" :class="{'four-tile': fourTile}" v-for="(post, i) in instagramPosts"
-      target="_blank" @click="clickInstagramMedia(post.node.shortcode)"
-      :style="{ 'background-image': 'url(' + post.node.display_url + ')' }">
+      target="_blank" @click="clickInstagramMedia(post.link)"
+      :style="{ 'background-image': 'url(' + post.images.standard_resolution.url + ')' }">
       </a>
     <div class="insta-btn-wrapper" :class="{'four-tile': fourTile}">
       <a target="_blank" href="https://www.instagram.com/wallaceHatch/" class="view-insta-btn">View Our Instagram</a>
@@ -15,10 +15,10 @@ import InstagramService from '@/InstagramService';
 export default {
   props: ['instagramPosts', 'fourTile'],
   methods: {
-    clickInstagramMedia(mediaId) {
+    clickInstagramMedia(link) {
       this.$store.commit('SET_INSTAGRAM_MODAL_ACTIVE', {
         active: true,
-        mediaId: mediaId,
+        mediaId: link.split("/")[4],
       })
     }
   }

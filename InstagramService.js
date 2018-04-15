@@ -7,7 +7,7 @@ svc.getInstagramMediaInfo = getInstagramMediaInfo;
 svc.getInstagramPosts = getInstagramPosts;
 
 function getInstagramPosts() {
-	return Promise.resolve(axios.get("https://www.instagram.com/wallacehatch/?__a=1"))
+	return Promise.resolve(axios.get(process.env.API_URL + 'instagram-media-recent/'))
 }
 
 function getInstagramMediaInfo(mediaId) {
