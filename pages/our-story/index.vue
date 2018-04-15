@@ -102,29 +102,46 @@ export default {
       document.getElementById('os_lazy_2').setAttribute('lazy', 'loaded')
     })
     InstagramService.getInstagramPosts().then((result) => {
-        this.liveInstagramPosts = result.data.graphql.user.edge_owner_to_timeline_media.edges.slice(0,12);
+        this.liveInstagramPosts = result.data.data.slice(0,12)
     })
   },
   data() {
     return {
       liveInstagramPosts: null,
       productInstagramPosts: [{
-        node: {
-        shortcode: 'BeifoHrBxs0',
-        display_url: 'https://www.instagram.com/p/BeifoHrBxs0/media/',
-      },}, {
-        node: {
-        shortcode: 'BenquNQBofW',
-        display_url: 'https://www.instagram.com/p/BenquNQBofW/media/',
-      },}, {
-        node: {
-        shortcode: 'BelHPVrhnsi',
-        display_url: 'https://www.instagram.com/p/BelHPVrhnsi/media/',
-      }, },{
-        node: {
-        shortcode: 'Be3w2gFhLyj',
-        display_url: 'https://www.instagram.com/p/Be3w2gFhLyj/media/',
-      },}]
+        link: "https://www.instagram.com/p/BeifoHrBxs0/",
+        images: {standard_resolution: {url:"https://www.instagram.com/p/BeifoHrBxs0/media/"}}
+      },
+      {
+        link: "https://www.instagram.com/p/BenquNQBofW/",
+        images: {standard_resolution: {url:"https://www.instagram.com/p/BenquNQBofW/media/"}}
+      },
+      {
+        link: "https://www.instagram.com/p/BelHPVrhnsi/",
+        images: {standard_resolution: {url:"https://www.instagram.com/p/BelHPVrhnsi/media/"}}
+      },
+      {
+        link: "https://www.instagram.com/p/Be3w2gFhLyj/",
+        images: {standard_resolution: {url:"https://www.instagram.com/p/Be3w2gFhLyj/media/"}}
+      },
+      ]
+      // productInstagramPosts: [{
+      //   node: {
+      //   shortcode: 'BeifoHrBxs0',
+      //   display_url: 'https://www.instagram.com/p/BeifoHrBxs0/media/',
+      // },}, {
+      //   node: {
+      //   shortcode: 'BenquNQBofW',
+      //   display_url: 'https://www.instagram.com/p/BenquNQBofW/media/',
+      // },}, {
+      //   node: {
+      //   shortcode: 'BelHPVrhnsi',
+      //   display_url: 'https://www.instagram.com/p/BelHPVrhnsi/media/',
+      // }, },{
+      //   node: {
+      //   shortcode: 'Be3w2gFhLyj',
+      //   display_url: 'https://www.instagram.com/p/Be3w2gFhLyj/media/',
+      // },}]
     }
   },
   beforeMount() {
